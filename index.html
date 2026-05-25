@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Magic Woods</title>
+  <style>
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Georgia', serif;
+      background: #0a1a0a;
+      color: #d4edda;
+      overflow-x: hidden;
+    }
+
+    /* ── Animated Stars Background ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 20% 50%, rgba(0,80,0,0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(0,60,40,0.12) 0%, transparent 50%),
+        radial-gradient(ellipse at 60% 80%, rgba(30,90,30,0.10) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── Firefly particles ── */
+    .fireflies {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .firefly {
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #aaff88;
+      box-shadow: 0 0 8px 3px rgba(170,255,136,0.7);
+      animation: fly var(--dur, 8s) ease-in-out infinite;
+      opacity: 0;
+    }
+    @keyframes fly {
+      0%   { transform: translate(0,0);       opacity: 0;   }
+      20%  { opacity: 0.9; }
+      50%  { transform: translate(var(--dx), var(--dy)); opacity: 0.6; }
+      80%  { opacity: 0.8; }
+      100% { transform: translate(0,0);       opacity: 0;   }
+    }
+
+    /* ── Hero Section ── */
+    .hero {
+      position: relative;
+      z-index: 2;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .hero-logo {
+      font-size: clamp(3rem, 10vw, 7rem);
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      line-height: 1.1;
+      background: linear-gradient(135deg, #56ff70 0%, #a8ff78 40%, #78ffd6 80%, #56ff70 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: none;
+      filter: drop-shadow(0 0 30px rgba(86,255,112,0.4));
+      animation: pulse-glow 3s ease-in-out infinite;
+    }
+    @keyframes pulse-glow {
+      0%, 100% { filter: drop-shadow(0 0 20px rgba(86,255,112,0.4)); }
+      50%       { filter: drop-shadow(0 0 50px rgba(86,255,112,0.8)); }
+    }
+
+    .hero-tagline {
+      margin-top: 1rem;
+      font-size: clamp(1rem, 3vw, 1.5rem);
+      color: #8ee89b;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      opacity: 0.85;
+    }
+
+    .hero-desc {
+      max-width: 580px;
+      margin: 1.5rem auto 0;
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: #b2d8bb;
+      opacity: 0.8;
+    }
+
+    .cta-group {
+      margin-top: 2.5rem;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn {
+      padding: 0.75rem 2rem;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-family: inherit;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn:hover { transform: translateY(-3px); }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #56ff70, #78ffd6);
+      color: #0a1a0a;
+      border: none;
+      font-weight: 700;
+      box-shadow: 0 4px 20px rgba(86,255,112,0.45);
+    }
+    .btn-primary:hover { box-shadow: 0 8px 30px rgba(86,255,112,0.7); }
+
+    .btn-outline {
+      background: transparent;
+      border: 2px solid #56ff70;
+      color: #56ff70;
+      box-shadow: 0 4px 15px rgba(86,255,112,0.2);
+    }
+    .btn-outline:hover { box-shadow: 0 6px 25px rgba(86,255,112,0.45); }
+
+    /* ── Tree SVG Divider ── */
+    .tree-divider {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      line-height: 0;
+    }
+    .tree-divider svg { display: block; }
+
+    /* ── Features Section ── */
+    .features {
+      position: relative;
+      z-index: 2;
+      background: rgba(5,20,5,0.7);
+      padding: 5rem 2rem;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: clamp(1.8rem, 5vw, 2.8rem);
+      color: #78ffd6;
+      margin-bottom: 3rem;
+      letter-spacing: 0.05em;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: linear-gradient(145deg, rgba(10,40,15,0.9), rgba(5,25,10,0.9));
+      border: 1px solid rgba(86,255,112,0.15);
+      border-radius: 16px;
+      padding: 2rem 1.5rem;
+      transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+      cursor: default;
+    }
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(86,255,112,0.5);
+      box-shadow: 0 12px 40px rgba(86,255,112,0.15);
+    }
+
+    .card-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .card h3 {
+      font-size: 1.25rem;
+      color: #a8ff78;
+      margin-bottom: 0.6rem;
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      color: #8aad90;
+      line-height: 1.7;
+    }
+
+    /* ── Gallery ── */
+    .gallery {
+      position: relative;
+      z-index: 2;
+      padding: 5rem 2rem;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .gallery-item {
+      border-radius: 12px;
+      overflow: hidden;
+      aspect-ratio: 1;
+      background: linear-gradient(135deg, var(--c1), var(--c2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+      position: relative;
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+    }
+    .gallery-item:hover {
+      transform: scale(1.04);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+    }
+
+    .gallery-item span.label {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 0.5rem;
+      background: rgba(0,0,0,0.5);
+      font-size: 0.85rem;
+      text-align: center;
+      color: #d4edda;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── Stats Bar ── */
+    .stats {
+      position: relative;
+      z-index: 2;
+      background: rgba(5,30,10,0.8);
+      padding: 3rem 2rem;
+      border-top: 1px solid rgba(86,255,112,0.1);
+      border-bottom: 1px solid rgba(86,255,112,0.1);
+    }
+
+    .stats-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 3rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 700;
+      background: linear-gradient(135deg, #56ff70, #78ffd6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      color: #6aaa76;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-top: 0.25rem;
+    }
+
+    /* ── Newsletter ── */
+    .newsletter {
+      position: relative;
+      z-index: 2;
+      padding: 5rem 2rem;
+      text-align: center;
+    }
+
+    .newsletter p {
+      max-width: 500px;
+      margin: 0.75rem auto 2rem;
+      color: #8aad90;
+      line-height: 1.7;
+    }
+
+    .subscribe-form {
+      display: flex;
+      gap: 0.75rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .subscribe-form input {
+      padding: 0.75rem 1.5rem;
+      border-radius: 50px;
+      border: 1px solid rgba(86,255,112,0.3);
+      background: rgba(10,40,15,0.8);
+      color: #d4edda;
+      font-size: 1rem;
+      font-family: inherit;
+      width: 280px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .subscribe-form input:focus { border-color: #56ff70; }
+    .subscribe-form input::placeholder { color: #4a7a52; }
+
+    /* ── Footer ── */
+    footer {
+      position: relative;
+      z-index: 2;
+      background: rgba(3,10,3,0.95);
+      padding: 2.5rem 2rem;
+      text-align: center;
+      border-top: 1px solid rgba(86,255,112,0.08);
+    }
+
+    .footer-logo {
+      font-size: 1.5rem;
+      color: #56ff70;
+      letter-spacing: 0.1em;
+      font-weight: 700;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 1rem 0;
+    }
+
+    .footer-links a {
+      color: #6aaa76;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: #56ff70; }
+
+    .footer-copy {
+      font-size: 0.8rem;
+      color: #3a5e40;
+      margin-top: 0.5rem;
+    }
+
+    /* ── Scroll reveal ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Fireflies -->
+  <div class="fireflies" id="fireflies"></div>
+
+  <!-- Hero -->
+  <section class="hero">
+    <h1 class="hero-logo">Magic Woods</h1>
+    <p class="hero-tagline">Where Nature Meets Wonder</p>
+    <p class="hero-desc">
+      Step into an enchanted realm of ancient trees, glowing fireflies,
+      and secrets hidden between the roots. Discover the magic that breathes
+      in every leaf and shadow.
+    </p>
+    <div class="cta-group">
+      <a href="#explore" class="btn btn-primary">Explore Now</a>
+      <a href="#about" class="btn btn-outline">Learn More</a>
+    </div>
+  </section>
+
+  <!-- SVG tree silhouette divider -->
+  <div class="tree-divider">
+    <svg viewBox="0 0 1440 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="width:100%;height:120px;">
+      <path d="M0,120 L0,80 Q50,40 80,70 Q100,20 120,60 Q140,10 160,55 Q180,0 200,50 Q220,5 240,55 Q260,15 280,60 Q310,25 330,65 Q360,10 390,60 Q420,20 440,65 Q470,5 500,55 Q530,20 550,60 Q580,0 610,50 Q640,15 660,55 Q690,5 720,50 Q750,10 770,55 Q800,0 830,50 Q860,15 880,55 Q910,5 940,50 Q970,20 990,60 Q1020,5 1050,55 Q1080,15 1100,60 Q1130,0 1160,50 Q1190,15 1210,55 Q1240,5 1270,50 Q1300,20 1320,60 Q1350,10 1380,55 Q1410,20 1440,60 L1440,120 Z"
+        fill="rgba(5,20,5,0.7)"/>
+    </svg>
+  </div>
+
+  <!-- Features -->
+  <section class="features" id="explore">
+    <h2 class="section-title reveal">The Wonders Within</h2>
+    <div class="cards">
+      <div class="card reveal">
+        <span class="card-icon">🌳</span>
+        <h3>Ancient Groves</h3>
+        <p>Walk beneath canopies older than memory, where every tree tells a story etched by centuries of sun and rain.</p>
+      </div>
+      <div class="card reveal">
+        <span class="card-icon">🌙</span>
+        <h3>Moonlit Paths</h3>
+        <p>Follow silver trails that wind through the heart of the woods, lit by a moon that never quite sets here.</p>
+      </div>
+      <div class="card reveal">
+        <span class="card-icon">🦋</span>
+        <h3>Rare Creatures</h3>
+        <p>Encounter beings found nowhere else — luminous moths, singing foxes, and the elusive forest spirits.</p>
+      </div>
+      <div class="card reveal">
+        <span class="card-icon">💧</span>
+        <h3>Healing Springs</h3>
+        <p>Rest beside crystal waters that bubble up from deep underground, carrying the earth's oldest secrets.</p>
+      </div>
+      <div class="card reveal">
+        <span class="card-icon">🍄</span>
+        <h3>Fairy Rings</h3>
+        <p>Discover perfect circles of glowing mushrooms — doorways, some say, to places even stranger than this.</p>
+      </div>
+      <div class="card reveal">
+        <span class="card-icon">⭐</span>
+        <h3>Starfall Meadows</h3>
+        <p>Open clearings where, on certain nights, stars drift down like petals and rest in the grass until dawn.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section class="gallery" id="about">
+    <h2 class="section-title reveal">Scenes from the Woods</h2>
+    <div class="gallery-grid">
+      <div class="gallery-item reveal" style="--c1:#0d3b1a;--c2:#1a6b35;">
+        <span>🌲</span><span class="label">Dawn Forest</span>
+      </div>
+      <div class="gallery-item reveal" style="--c1:#0a2e30;--c2:#0f5e4a;">
+        <span>🍃</span><span class="label">Emerald Canopy</span>
+      </div>
+      <div class="gallery-item reveal" style="--c1:#1a1a3a;--c2:#2a2070;">
+        <span>🌌</span><span class="label">Midnight Glade</span>
+      </div>
+      <div class="gallery-item reveal" style="--c1:#2a1a0a;--c2:#5a3520;">
+        <span>🍂</span><span class="label">Autumn Path</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <div class="stats reveal">
+    <div class="stats-grid">
+      <div class="stat">
+        <div class="stat-number" data-target="2400">0</div>
+        <div class="stat-label">Acres of Forest</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number" data-target="340">0</div>
+        <div class="stat-label">Species of Flora</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number" data-target="120">0</div>
+        <div class="stat-label">Rare Creatures</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number" data-target="50000">0</div>
+        <div class="stat-label">Visitors per Year</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Newsletter -->
+  <section class="newsletter">
+    <h2 class="section-title reveal">Stay Connected to the Magic</h2>
+    <p class="reveal">Receive seasonal stories, hidden trail updates, and invitations to moonlit events deep in the woods.</p>
+    <form class="subscribe-form reveal" onsubmit="handleSubscribe(event)">
+      <input type="email" placeholder="your@email.com" required aria-label="Email address" />
+      <button type="submit" class="btn btn-primary">Subscribe</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-logo">Magic Woods</div>
+    <nav class="footer-links">
+      <a href="#">Home</a>
+      <a href="#">Explore</a>
+      <a href="#">Gallery</a>
+      <a href="#">Events</a>
+      <a href="#">Contact</a>
+    </nav>
+    <p class="footer-copy">&copy; 2026 Magic Woods. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // ── Fireflies ──
+    const container = document.getElementById('fireflies');
+    for (let i = 0; i < 40; i++) {
+      const f = document.createElement('div');
+      f.className = 'firefly';
+      f.style.left  = Math.random() * 100 + 'vw';
+      f.style.top   = Math.random() * 100 + 'vh';
+      f.style.setProperty('--dur',  (6 + Math.random() * 10) + 's');
+      f.style.setProperty('--dx',   (Math.random() * 200 - 100) + 'px');
+      f.style.setProperty('--dy',   (Math.random() * 200 - 100) + 'px');
+      f.style.animationDelay = (Math.random() * 8) + 's';
+      container.appendChild(f);
+    }
+
+    // ── Scroll Reveal ──
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // ── Count-up Animation ──
+    const counters = document.querySelectorAll('.stat-number[data-target]');
+    const countObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        const el = e.target;
+        const target = +el.dataset.target;
+        let current = 0;
+        const step = Math.ceil(target / 60);
+        const tick = setInterval(() => {
+          current = Math.min(current + step, target);
+          el.textContent = current.toLocaleString();
+          if (current >= target) clearInterval(tick);
+        }, 25);
+        countObserver.unobserve(el);
+      });
+    }, { threshold: 0.5 });
+    counters.forEach(c => countObserver.observe(c));
+
+    // ── Subscribe Form ──
+    function handleSubscribe(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('button');
+      btn.textContent = 'Welcome to the Woods!';
+      btn.style.background = 'linear-gradient(135deg,#78ffd6,#56ff70)';
+      e.target.querySelector('input').value = '';
+      setTimeout(() => { btn.textContent = 'Subscribe'; btn.style.background = ''; }, 3000);
+    }
+  </script>
+</body>
+</html>
