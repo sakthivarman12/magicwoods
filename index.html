@@ -112,21 +112,72 @@
       font-size: 0.7rem; font-weight: 700;
     }
 
-    /* ── Hero ── */
-    .hero {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: var(--sp-xl); align-items: center;
-      padding: var(--sp-xl) 0; min-height: 560px;
-    }
-    .hero-content h1 { color: var(--primary); margin-bottom: var(--sp-md); }
-    .hero-content p  { font-size: 1.05rem; margin-bottom: var(--sp-lg); }
-    .hero-buttons    { display: flex; gap: var(--sp-md); flex-wrap: wrap; }
-    .hero-image {
-      background: linear-gradient(135deg, #e8dcc8 0%, #d4c4b0 100%);
-      border-radius: 10px; height: 480px;
+    /* ── Hero Video ── */
+    .hero-video-section {
+      position: relative; height: 100vh; overflow: hidden;
       display: flex; align-items: center; justify-content: center;
-      font-size: 7rem; color: rgba(26,58,46,0.15);
-      box-shadow: inset 0 2px 20px rgba(0,0,0,0.06);
+    }
+    .hero-video-section video {
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; z-index: 0;
+      pointer-events: none;
+    }
+    .hero-video-overlay {
+      position: absolute; inset: 0; z-index: 1;
+      background: rgba(0,0,0,0.38);
+    }
+    .hero-video-content {
+      position: relative; z-index: 2;
+      text-align: center; color: #fff;
+      padding: 0 var(--sp-md); max-width: 860px;
+    }
+    .hero-video-content .eyebrow-hero {
+      letter-spacing: 3.5px; font-size: 0.78rem; font-weight: 500;
+      color: rgba(255,255,255,0.82); margin-bottom: var(--sp-lg);
+      display: block;
+    }
+    .hero-video-content h1 {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: clamp(2.4rem, 6.5vw, 4.8rem);
+      font-weight: 400; line-height: 1.1;
+      color: #fff; margin-bottom: 0;
+    }
+    .hero-video-content h1 em {
+      font-style: italic; font-weight: 300;
+      color: rgba(255,255,255,0.9);
+    }
+    .hero-video-content .hero-sub {
+      font-size: 1.05rem; color: rgba(255,255,255,0.78);
+      margin: var(--sp-lg) 0 var(--sp-xl);
+    }
+    .hero-video-buttons { display: flex; gap: var(--sp-md); justify-content: center; flex-wrap: wrap; }
+    .btn-hero-white {
+      background: #fff; color: #1a1a1a;
+      letter-spacing: 1.5px; font-size: 0.8rem;
+    }
+    .btn-hero-white:hover { background: rgba(255,255,255,0.88); }
+    .btn-hero-outline {
+      background: transparent; color: #fff;
+      border: 2px solid #fff;
+      letter-spacing: 1.5px; font-size: 0.8rem;
+    }
+    .btn-hero-outline:hover { background: rgba(255,255,255,0.15); }
+    .hero-stats-bar {
+      position: absolute; bottom: 0; left: 0; right: 0; z-index: 2;
+      background: rgba(0,0,0,0.48);
+      display: flex; justify-content: center;
+      gap: clamp(var(--sp-lg), 6vw, 5rem);
+      padding: var(--sp-md) 0;
+      border-top: 1px solid rgba(255,255,255,0.12);
+    }
+    .hero-stat { text-align: center; color: #fff; }
+    .hero-stat-num { font-size: 1.6rem; font-weight: 700; line-height: 1; }
+    .hero-stat-label { font-size: 0.72rem; color: rgba(255,255,255,0.65); letter-spacing: 1px; margin-top: 4px; }
+    @media (max-width: 600px) {
+      .hero-video-section { height: 100svh; }
+      .hero-stats-bar { gap: var(--sp-lg); }
+      .hero-stat-num { font-size: 1.2rem; }
     }
 
     /* ── Section ── */
@@ -649,22 +700,39 @@
             </div>
           </header>
 
-          {/* ── Hero ── */}
-          <section style={{borderBottom:'1px solid var(--border)'}}>
-            <div className="container">
-              <div className="hero">
-                <div className="hero-content">
-                  <h1>Premium Modular Furniture for Modern Indian Homes</h1>
-                  <p style={{marginTop:'var(--sp-md)'}}>
-                    Real-time 3D visualization &bull; Transparent pricing &bull; Professional installation &bull; 5–15 year warranty on every product
-                  </p>
-                  <div className="hero-buttons" style={{marginTop:'var(--sp-lg)'}}>
-                    <button className="btn btn-primary" onClick={() => document.getElementById('catalog').scrollIntoView({behavior:'smooth'})}>Explore Catalog</button>
-                    <button className="btn btn-outline" onClick={() => showToast('Consultation request received! We\'ll be in touch.')}>Book Free Consultation</button>
-                  </div>
-                </div>
-                <div className="hero-image">📦</div>
+          {/* ── Hero Video ── */}
+          <section className="hero-video-section">
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              src="../../../../Downloads/The 29th _ 3 BHK Bangalore Apartment Interior Design _ Architecture Saga.mp4"
+            />
+            <div className="hero-video-overlay" />
+            <div className="hero-video-content">
+              <span className="eyebrow-hero">PREMIUM HOME FURNISHING — INDIA</span>
+              <h1>
+                Furnishing of apartments<br />
+                <em>All Over India</em>
+              </h1>
+              <p className="hero-sub">From empty walls to a fully furnished home</p>
+              <div className="hero-video-buttons">
+                <button className="btn btn-hero-white" onClick={() => document.getElementById('catalog').scrollIntoView({behavior:'smooth'})}>
+                  EXPLORE PACKAGES
+                </button>
+                <button className="btn btn-hero-outline" onClick={() => showToast('Consultation request received! We\'ll be in touch.')}>
+                  BOOK FREE VISIT
+                </button>
               </div>
+            </div>
+            <div className="hero-stats-bar">
+              {[['5,999+','Projects Done'],['7','Years Experience'],['1 Lac+','Sq Ft Designed'],['4.9★','Client Rating']].map(([num,label]) => (
+                <div key={label} className="hero-stat">
+                  <div className="hero-stat-num">{num}</div>
+                  <div className="hero-stat-label">{label}</div>
+                </div>
+              ))}
             </div>
           </section>
 
