@@ -125,7 +125,7 @@
     }
     .hero-video-overlay {
       position: absolute; inset: 0; z-index: 1;
-      background: rgba(0,0,0,0.38);
+      background: rgba(0,0,0,0.22);
     }
     .hero-video-content {
       position: relative; z-index: 2;
@@ -707,6 +707,7 @@
               muted
               loop
               playsInline
+              onLoadedData={e => { e.target.currentTime = 8; }}
               src="../../../../Downloads/The 29th _ 3 BHK Bangalore Apartment Interior Design _ Architecture Saga.mp4"
             />
             <div className="hero-video-overlay" />
