@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magic Woods - Premium Designer Furniture</title>
+    <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-primary: #2a5a3e;
+            --color-primary-light: #4a7a5e;
+            --color-accent: #5e3a2a;
+            --color-accent-warm: #b8860b;
+            --color-accent-blue: #1e3a5f;
+            --color-bg-light: #f5f1eb;
+            --color-bg-white: #ffffff;
+            --color-text-dark: #1a1a1a;
+            --color-text-light: #666666;
+            --color-border: #e0dcd3;
+            --color-success: #4a7a5e;
+            --space-xs: 0.5rem;
+            --space-sm: 1rem;
+            --space-md: 1.5rem;
+            --space-lg: 2rem;
+            --space-xl: 3rem;
+            --space-2xl: 4rem;
+        }
+
+        html, body {
+            width: 100%;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+            background-color: var(--color-bg-white);
+            color: var(--color-text-dark);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 var(--space-md);
+        }
+
+        h1, h2, h3, h4 { font-weight: 600; line-height: 1.3; }
+        h1 { font-size: clamp(2rem, 5vw, 4rem); margin-bottom: var(--space-md); }
+        h2 { font-size: clamp(1.5rem, 4vw, 2.5rem); margin-bottom: var(--space-lg); }
+        h3 { font-size: 1.25rem; margin-bottom: var(--space-sm); }
+
+        p { font-size: 1rem; line-height: 1.6; color: var(--color-text-light); margin-bottom: var(--space-md); }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-sm);
+            padding: var(--space-sm) var(--space-lg);
+            border: none;
+            border-radius: 0.25rem;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: var(--color-primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--color-primary-light);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(42, 90, 62, 0.2);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--color-primary);
+            border: 1.5px solid var(--color-primary);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--color-primary);
+            color: white;
+        }
+
+        header {
+            background-color: var(--color-bg-white);
+            border-bottom: 1px solid var(--color-border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--space-md) 0;
+        }
+
+        .nav-brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+            color: var(--color-primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: var(--space-xl);
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--color-text-dark);
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--color-accent-warm);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: var(--space-lg);
+            align-items: center;
+        }
+
+        .icon-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--color-text-dark);
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .icon-btn:hover {
+            color: var(--color-accent-warm);
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: var(--color-accent-warm);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .user-badge {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-xs) var(--space-md);
+            background-color: var(--color-bg-light);
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-accent-warm));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.875rem;
+            font-weight: 700;
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            backdrop-filter: blur(4px);
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 12px;
+            padding: var(--space-2xl);
+            width: 90%;
+            max-width: 450px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            animation: slideUp 0.3s ease;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .form-group {
+            margin-bottom: var(--space-lg);
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+            color: var(--color-text-dark);
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: var(--space-sm);
+            border: 1px solid var(--color-border);
+            border-radius: 0.25rem;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(42, 90, 62, 0.1);
+        }
+
+        .role-selector {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+        }
+
+        .role-option {
+            padding: var(--space-md);
+            border: 2px solid var(--color-border);
+            border-radius: 0.5rem;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .role-option.selected {
+            background-color: var(--color-primary);
+            color: white;
+            border-color: var(--color-primary);
+        }
+
+        .role-option-icon {
+            font-size: 2rem;
+            margin-bottom: var(--space-xs);
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: var(--space-md);
+        }
+
+        .modal-buttons button {
+            flex: 1;
+            padding: var(--space-sm);
+            border: none;
+            border-radius: 0.25rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-submit {
+            background-color: var(--color-primary);
+            color: white;
+        }
+
+        .btn-submit:hover {
+            background-color: var(--color-primary-light);
+        }
+
+        .btn-cancel {
+            background-color: var(--color-bg-light);
+            color: var(--color-text-dark);
+        }
+
+        /* Feature Boxes */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-lg);
+            margin: var(--space-2xl) 0;
+        }
+
+        .feature-box {
+            padding: var(--space-lg);
+            background: var(--color-bg-light);
+            border-radius: 0.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .feature-box:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: var(--space-md);
+        }
+
+        .feature-box h3 {
+            color: var(--color-primary);
+            margin-bottom: var(--space-sm);
+        }
+
+        .feature-box p {
+            font-size: 0.875rem;
+            margin: 0;
+        }
+
+        /* Price Calculator */
+        .calculator-section {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+            color: white;
+            padding: var(--space-2xl);
+            border-radius: 0.5rem;
+            margin: var(--space-2xl) 0;
+        }
+
+        .calculator-section h2 {
+            color: white;
+            margin-bottom: var(--space-lg);
+        }
+
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-lg);
+            margin-bottom: var(--space-xl);
+        }
+
+        .calc-input {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .calc-input label {
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+            font-size: 0.875rem;
+        }
+
+        .calc-input input, .calc-input select {
+            padding: var(--space-sm);
+            border: none;
+            border-radius: 0.25rem;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+
+        .calc-result {
+            background: rgba(255, 255, 255, 0.2);
+            padding: var(--space-lg);
+            border-radius: 0.5rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .calc-result-label {
+            font-size: 0.875rem;
+            opacity: 0.9;
+            margin-bottom: var(--space-sm);
+        }
+
+        .calc-result-value {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: var(--space-sm);
+        }
+
+        /* Products Grid */
+        .section {
+            padding: var(--space-2xl) 0;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: var(--space-2xl);
+        }
+
+        .section-header p {
+            color: var(--color-accent-warm);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.875rem;
+            letter-spacing: 1px;
+            margin-bottom: var(--space-md);
+        }
+
+        .filters {
+            display: flex;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-xl);
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .filter-btn {
+            padding: var(--space-sm) var(--space-md);
+            border: 1px solid var(--color-border);
+            background: white;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            color: var(--color-text-light);
+        }
+
+        .filter-btn.active {
+            background-color: var(--color-primary);
+            color: white;
+            border-color: var(--color-primary);
+        }
+
+        .filter-btn:hover {
+            border-color: var(--color-primary);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: var(--space-lg);
+            margin-bottom: var(--space-2xl);
+        }
+
+        .product-card {
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            background: white;
+            border: 1px solid var(--color-border);
+            border-radius: 0.5rem;
+            padding: var(--space-md);
+            overflow: hidden;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+        }
+
+        .product-image {
+            width: 100%;
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, #e8dcc8 0%, #d4c4b0 100%);
+            border-radius: 0.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: rgba(42, 90, 62, 0.2);
+            margin-bottom: var(--space-md);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-badge {
+            position: absolute;
+            top: var(--space-md);
+            right: var(--space-md);
+            background-color: var(--color-accent-warm);
+            color: white;
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: 0.25rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            z-index: 10;
+        }
+
+        .product-name {
+            font-weight: 600;
+            margin-bottom: var(--space-xs);
+        }
+
+        .product-spec {
+            font-size: 0.75rem;
+            color: var(--color-text-light);
+            margin-bottom: var(--space-sm);
+            line-height: 1.4;
+        }
+
+        .product-rating {
+            display: flex;
+            gap: var(--space-xs);
+            margin-bottom: var(--space-md);
+            font-size: 0.875rem;
+        }
+
+        .product-price {
+            display: flex;
+            gap: var(--space-sm);
+            align-items: baseline;
+            margin-bottom: var(--space-md);
+        }
+
+        .price-current {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--color-primary);
+        }
+
+        .price-original {
+            font-size: 0.875rem;
+            color: var(--color-text-light);
+            text-decoration: line-through;
+        }
+
+        .warranty-tag {
+            background: rgba(42, 90, 62, 0.1);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            color: var(--color-primary);
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+            display: inline-block;
+        }
+
+        /* Experience Centers */
+        .centers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-lg);
+            margin-bottom: var(--space-2xl);
+        }
+
+        .center-card {
+            border: 1px solid var(--color-border);
+            padding: var(--space-lg);
+            border-radius: 0.5rem;
+            background: var(--color-bg-light);
+        }
+
+        .center-card h3 {
+            color: var(--color-primary);
+            margin-bottom: var(--space-sm);
+        }
+
+        .center-info {
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+
+        .center-info p {
+            margin-bottom: var(--space-sm);
+        }
+
+        .center-btn {
+            background-color: var(--color-primary);
+            color: white;
+            padding: var(--space-sm) var(--space-md);
+            border: none;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            font-weight: 600;
+            width: 100%;
+            margin-top: var(--space-md);
+            transition: all 0.3s ease;
+        }
+
+        .center-btn:hover {
+            background-color: var(--color-primary-light);
+        }
+
+        /* Consultation Form */
+        .consultation-form {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .form-section {
+            margin-bottom: var(--space-xl);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--color-text-dark);
+            color: rgba(255, 255, 255, 0.8);
+            padding: var(--space-2xl) 0;
+            margin-top: var(--space-2xl);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-xl);
+            margin-bottom: var(--space-xl);
+        }
+
+        .footer-section h4 {
+            color: white;
+            margin-bottom: var(--space-md);
+            font-size: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: var(--space-sm);
+        }
+
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--color-accent-warm);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { gap: var(--space-lg); }
+            .products-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+        }
+    </style>
+</head>
+<body>
+    <div id="app"></div>
+
+    <script type="text/babel">
+        const App = () => {
+            const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+            const [userRole, setUserRole] = React.useState(null);
+            const [userName, setUserName] = React.useState('');
+            const [showLoginModal, setShowLoginModal] = React.useState(false);
+            const [activeTab, setActiveTab] = React.useState('home');
+            const [cartCount, setCartCount] = React.useState(2);
+            const [email, setEmail] = React.useState('');
+            const [password, setPassword] = React.useState('');
+            const [selectedRole, setSelectedRole] = React.useState(null);
+            const [roomSize, setRoomSize] = React.useState(150);
+            const [furnitureType, setFurnitureType] = React.useState('modular');
+            const [consultationType, setConsultationType] = React.useState('online');
+
+            const handleLogin = () => {
+                if (!selectedRole || !email || !password) {
+                    alert('Please fill all fields');
+                    return;
+                }
+                setIsLoggedIn(true);
+                setUserRole(selectedRole);
+                setUserName(email.split('@')[0].toUpperCase());
+                setShowLoginModal(false);
+                setEmail('');
+                setPassword('');
+                setSelectedRole(null);
+            };
+
+            const estimatedBudget = {
+                'modular': { 150: 150000, 200: 200000, 250: 280000 },
+                'custom': { 150: 250000, 200: 350000, 250: 450000 },
+                'premium': { 150: 400000, 200: 550000, 250: 750000 }
+            };
+
+            const budget = estimatedBudget[furnitureType]?.[roomSize] || 0;
+
+            const products = [
+                {name: 'Modular Kitchen', price: '₹1,50,000', original: '₹1,75,000', badge: 'Sale', rating: 4.8, spec: 'Marine Plywood | 10 Yr Warranty', warranty: '10 Year'},
+                {name: 'Customizable Wardrobe', price: '₹95,000', original: null, badge: 'Bestseller', rating: 4.9, spec: 'Laminate Finish | Space Saving', warranty: '7 Year'},
+                {name: 'Living Room Set', price: '₹2,40,000', original: '₹2,80,000', badge: 'Sale', rating: 4.7, spec: 'Walnut Finish | Full Customization', warranty: '10 Year'},
+                {name: 'Bedroom Suite', price: '₹1,80,000', original: null, badge: 'New', rating: 4.6, spec: 'Premium Fabric | Installation Included', warranty: '8 Year'},
+                {name: 'Study Desk & Shelving', price: '₹65,000', original: '₹85,000', badge: 'Sale', rating: 4.5, spec: 'Modular Design | Easy Assembly', warranty: '5 Year'},
+                {name: 'Dining Collection', price: '₹1,20,000', original: '₹1,45,000', badge: 'Sale', rating: 4.8, spec: 'Solid Wood | 6-8 Seater', warranty: '10 Year'},
+            ];
+
+            const centers = [
+                { city: 'Bangalore', address: 'Indiranagar, Whitefield', hours: 'Mon-Sun 10AM-7PM', phone: '+91 80-XXXX-XXXX' },
+                { city: 'Mumbai', address: 'Bandra, Andheri', hours: 'Mon-Sun 10AM-7PM', phone: '+91 22-XXXX-XXXX' },
+                { city: 'Delhi NCR', address: 'Connaught Place, Noida', hours: 'Mon-Sun 10AM-7PM', phone: '+91 11-XXXX-XXXX' },
+                { city: 'Hyderabad', address: 'Hitech City, Banjara Hills', hours: 'Mon-Sun 11AM-8PM', phone: '+91 40-XXXX-XXXX' },
+                { city: 'Pune', address: 'Koregaon Park, Hinjewadi', hours: 'Mon-Sun 10AM-7PM', phone: '+91 20-XXXX-XXXX' },
+                { city: 'Chennai', address: 'Nungambakkam, T.Nagar', hours: 'Mon-Sun 10AM-7PM', phone: '+91 44-XXXX-XXXX' },
+            ];
+
+            return (
+                <div>
+                    {/* Header */}
+                    <header>
+                        <div className="container">
+                            <nav>
+                                <div className="nav-brand">Magic Woods</div>
+                                <ul className="nav-links">
+                                    <li><a href="#" onClick={() => setActiveTab('home')}>Home</a></li>
+                                    <li><a href="#" onClick={() => setActiveTab('products')}>Products</a></li>
+                                    <li><a href="#" onClick={() => setActiveTab('calculator')}>Budget Calculator</a></li>
+                                    <li><a href="#" onClick={() => setActiveTab('consultation')}>Consultation</a></li>
+                                </ul>
+                                <div className="nav-icons">
+                                    <button className="icon-btn">🔍</button>
+                                    <button className="icon-btn">❤️</button>
+                                    <button className="icon-btn">🛒{cartCount > 0 && <span className="cart-badge">{cartCount}</span>}</button>
+                                    {isLoggedIn ? (
+                                        <div className="user-badge">
+                                            <div className="user-avatar">{userName[0]}</div>
+                                            <div>{userName}</div>
+                                        </div>
+                                    ) : (
+                                        <button className="btn btn-primary" onClick={() => setShowLoginModal(true)} style={{padding: '0.5rem 1rem', fontSize: '0.875rem'}}>Login</button>
+                                    )}
+                                </div>
+                            </nav>
+                        </div>
+                    </header>
+
+                    {/* Home Tab */}
+                    {activeTab === 'home' && (
+                        <>
+                            <section className="container" style={{padding: '3rem 0'}}>
+                                <h1 style={{color: 'var(--color-primary)', marginBottom: '1rem'}}>Premium Modular Furniture for Indian Homes</h1>
+                                <p style={{fontSize: '1.125rem', marginBottom: '2rem'}}>Spacecraft-powered 3D visualization • Real-time pricing • Professional installation • 7-10 year warranty</p>
+                                <div style={{display: 'flex', gap: '1rem'}}>
+                                    <button className="btn btn-primary" onClick={() => setActiveTab('products')}>Explore Collections</button>
+                                    <button className="btn btn-secondary" onClick={() => setActiveTab('consultation')}>Book Consultation</button>
+                                </div>
+                            </section>
+
+                            <section className="container features-grid">
+                                <div className="feature-box">
+                                    <div className="feature-icon">🎨</div>
+                                    <h3>3D Visualization</h3>
+                                    <p>SpaceCraft AI-powered design platform. See your home before installation.</p>
+                                </div>
+                                <div className="feature-box">
+                                    <div className="feature-icon">💰</div>
+                                    <h3>Transparent Pricing</h3>
+                                    <p>Real-time budget calculator. No hidden charges. Instant quotes.</p>
+                                </div>
+                                <div className="feature-box">
+                                    <div className="feature-icon">🏪</div>
+                                    <h3>Experience Centers</h3>
+                                    <p>6+ locations nationwide. Touch & feel before buying.</p>
+                                </div>
+                                <div className="feature-box">
+                                    <div className="feature-icon">👨‍💼</div>
+                                    <h3>Expert Designers</h3>
+                                    <p>In-house design team. Virtual & in-person consultations.</p>
+                                </div>
+                                <div className="feature-box">
+                                    <div className="feature-icon">🚚</div>
+                                    <h3>Installation & Setup</h3>
+                                    <p>End-to-end execution. Professional installation included.</p>
+                                </div>
+                                <div className="feature-box">
+                                    <div className="feature-icon">🔒</div>
+                                    <h3>Quality Assurance</h3>
+                                    <p>7-10 year warranty. Marine plywood & premium materials.</p>
+                                </div>
+                            </section>
+                        </>
+                    )}
+
+                    {/* Products Tab */}
+                    {activeTab === 'products' && (
+                        <section className="section">
+                            <div className="container">
+                                <div className="section-header">
+                                    <p>Curated Collections</p>
+                                    <h2>Our Featured Products</h2>
+                                </div>
+
+                                <div className="filters">
+                                    <button className="filter-btn active">All</button>
+                                    <button className="filter-btn">Modular Kitchens</button>
+                                    <button className="filter-btn">Wardrobes</button>
+                                    <button className="filter-btn">Living Room</button>
+                                    <button className="filter-btn">Budget: Under ₹1L</button>
+                                    <button className="filter-btn">Budget: ₹1-3L</button>
+                                </div>
+
+                                <div className="products-grid">
+                                    {products.map((prod, idx) => (
+                                        <div key={idx} className="product-card">
+                                            <div className="product-image">
+                                                📦
+                                                {prod.badge && <span className="product-badge">{prod.badge}</span>}
+                                            </div>
+                                            <div className="product-name">{prod.name}</div>
+                                            <div className="product-spec">{prod.spec}</div>
+                                            <div className="warranty-tag">✓ {prod.warranty}</div>
+                                            <div className="product-rating">
+                                                {'⭐'.repeat(Math.floor(prod.rating))} {prod.rating}
+                                            </div>
+                                            <div className="product-price">
+                                                <span className="price-current">{prod.price}</span>
+                                                {prod.original && <span className="price-original">{prod.original}</span>}
+                                            </div>
+                                            <button className="btn btn-primary" style={{width: '100%', marginBottom: '0.5rem'}}>View Details</button>
+                                            <button className="btn btn-secondary" style={{width: '100%'}}>Add to Cart</button>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </section>
+                    )}
+
+                    {/* Budget Calculator Tab */}
+                    {activeTab === 'calculator' && (
+                        <section className="container" style={{padding: '3rem 0'}}>
+                            <h2 style={{textAlign: 'center', marginBottom: '2rem'}}>Real-Time Budget Calculator</h2>
+                            
+                            <div className="calculator-section">
+                                <div className="calculator-grid">
+                                    <div className="calc-input">
+                                        <label>Room Size (Sq Ft)</label>
+                                        <input type="range" min="100" max="300" step="50" value={roomSize} onChange={(e) => setRoomSize(Number(e.target.value))} style={{cursor: 'pointer'}} />
+                                        <span style={{color: 'white', fontWeight: '600', marginTop: '0.5rem'}}>{roomSize} sq ft</span>
+                                    </div>
+
+                                    <div className="calc-input">
+                                        <label>Furniture Type</label>
+                                        <select value={furnitureType} onChange={(e) => setFurnitureType(e.target.value)}>
+                                            <option value="modular">Modular (Budget)</option>
+                                            <option value="custom">Custom Design</option>
+                                            <option value="premium">Premium Collection</option>
+                                        </select>
+                                    </div>
+
+                                    <div className="calc-result">
+                                        <div className="calc-result-label">Estimated Budget</div>
+                                        <div className="calc-result-value">₹{budget.toLocaleString('en-IN')}</div>
+                                        <div className="calc-result-label">Inclusive of installation</div>
+                                    </div>
+                                </div>
+
+                                <div style={{marginTop: '2rem', textAlign: 'center'}}>
+                                    <button className="btn" style={{backgroundColor: 'var(--color-accent-warm)', color: 'var(--color-text-dark)', padding: '0.75rem 2rem'}}>Get Detailed Quote</button>
+                                </div>
+                            </div>
+                        </section>
+                    )}
+
+                    {/* Consultation Tab */}
+                    {activeTab === 'consultation' && (
+                        <section className="container" style={{padding: '3rem 0'}}>
+                            <h2 style={{textAlign: 'center', marginBottom: '2rem'}}>Book Free Design Consultation</h2>
+
+                            <div className="consultation-form">
+                                <div className="form-section">
+                                    <div className="form-group">
+                                        <label>Full Name</label>
+                                        <input type="text" placeholder="Your name" />
+                                    </div>
+                                    <div className="form-group">
+                                        <label>Phone Number</label>
+                                        <input type="tel" placeholder="+91 XXXXX XXXXX" />
+                                    </div>
+                                    <div className="form-group">
+                                        <label>Email</label>
+                                        <input type="email" placeholder="your@email.com" />
+                                    </div>
+                                </div>
+
+                                <div className="form-section">
+                                    <label style={{display: 'block', marginBottom: '1rem'}}>Consultation Type</label>
+                                    <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1.5rem'}}>
+                                        <div onClick={() => setConsultationType('online')} style={{padding: '1rem', border: consultationType === 'online' ? '2px solid var(--color-primary)' : '1px solid var(--color-border)', borderRadius: '0.5rem', cursor: 'pointer', textAlign: 'center', backgroundColor: consultationType === 'online' ? 'rgba(42, 90, 62, 0.1)' : 'white'}}>
+                                            <div style={{fontSize: '1.5rem', marginBottom: '0.5rem'}}>💻</div>
+                                            <div style={{fontWeight: '600', color: 'var(--color-text-dark)'}}>Virtual Call</div>
+                                        </div>
+                                        <div onClick={() => setConsultationType('inperson')} style={{padding: '1rem', border: consultationType === 'inperson' ? '2px solid var(--color-primary)' : '1px solid var(--color-border)', borderRadius: '0.5rem', cursor: 'pointer', textAlign: 'center', backgroundColor: consultationType === 'inperson' ? 'rgba(42, 90, 62, 0.1)' : 'white'}}>
+                                            <div style={{fontSize: '1.5rem', marginBottom: '0.5rem'}}>🏪</div>
+                                            <div style={{fontWeight: '600', color: 'var(--color-text-dark)'}}>Visit Center</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button className="btn btn-primary" style={{width: '100%', padding: '1rem'}}>Schedule Consultation</button>
+                            </div>
+
+                            <div style={{marginTop: '3rem'}}>
+                                <h3 style={{marginTop: '2rem', marginBottom: '1.5rem'}}>Visit Our Experience Centers</h3>
+                                <div className="centers-grid">
+                                    {centers.map((center, idx) => (
+                                        <div key={idx} className="center-card">
+                                            <h3>{center.city}</h3>
+                                            <div className="center-info">
+                                                <p><strong>📍</strong> {center.address}</p>
+                                                <p><strong>⏰</strong> {center.hours}</p>
+                                                <p><strong>📞</strong> {center.phone}</p>
+                                            </div>
+                                            <button className="center-btn">Get Directions</button>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </section>
+                    )}
+
+                    {/* Login Modal */}
+                    {showLoginModal && (
+                        <div className="modal-overlay" onClick={() => setShowLoginModal(false)}>
+                            <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                                <h2 style={{marginBottom: '0.5rem'}}>Welcome</h2>
+                                <p style={{marginBottom: '1.5rem'}}>Login to your Magic Woods account</p>
+
+                                <div className="role-selector">
+                                    <div className={`role-option ${selectedRole === 'customer' ? 'selected' : ''}`} onClick={() => setSelectedRole('customer')}>
+                                        <div className="role-option-icon">👤</div>
+                                        <div>Customer</div>
+                                    </div>
+                                    <div className={`role-option ${selectedRole === 'designer' ? 'selected' : ''}`} onClick={() => setSelectedRole('designer')}>
+                                        <div className="role-option-icon">🎨</div>
+                                        <div>Designer</div>
+                                    </div>
+                                </div>
+
+                                <div className="form-group">
+                                    <label>Email</label>
+                                    <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="your@email.com" />
+                                </div>
+
+                                <div className="form-group">
+                                    <label>Password</label>
+                                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="••••••••" />
+                                </div>
+
+                                <div className="modal-buttons">
+                                    <button className="btn-submit" onClick={handleLogin}>Login</button>
+                                    <button className="btn-cancel" onClick={() => setShowLoginModal(false)}>Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Footer */}
+                    <footer>
+                        <div className="container">
+                            <div className="footer-grid">
+                                <div className="footer-section">
+                                    <h4>About Magic Woods</h4>
+                                    <ul>
+                                        <li><a href="#">Our Story</a></li>
+                                        <li><a href="#">Quality Standards</a></li>
+                                        <li><a href="#">Warranty Info</a></li>
+                                        <li><a href="#">Press</a></li>
+                                    </ul>
+                                </div>
+                                <div className="footer-section">
+                                    <h4>Customer Support</h4>
+                                    <ul>
+                                        <li><a href="#">Shipping & Delivery</a></li>
+                                        <li><a href="#">Returns Policy</a></li>
+                                        <li><a href="#">Installation Guide</a></li>
+                                        <li><a href="#">FAQs</a></li>
+                                    </ul>
+                                </div>
+                                <div className="footer-section">
+                                    <h4>Products</h4>
+                                    <ul>
+                                        <li><a href="#">Modular Kitchens</a></li>
+                                        <li><a href="#">Wardrobes</a></li>
+                                        <li><a href="#">Living Room</a></li>
+                                        <li><a href="#">Bedroom</a></li>
+                                    </ul>
+                                </div>
+                                <div className="footer-section">
+                                    <h4>Visit Us</h4>
+                                    <ul>
+                                        <li><a href="#">Experience Centers</a></li>
+                                        <li><a href="#">Book Appointment</a></li>
+                                        <li><a href="#">Download Catalog</a></li>
+                                        <li><a href="#">Contact Us</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div style={{borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '2rem', textAlign: 'center', fontSize: '0.875rem'}}>
+                                <p>&copy; 2026 Magic Woods. All rights reserved. | Terms of Service | Privacy Policy</p>
+                            </div>
+                        </div>
+                    </footer>
+                </div>
+            );
+        };
+
+        ReactDOM.createRoot(document.getElementById('app')).render(<App />);
+    </script>
+</body>
+</html>
