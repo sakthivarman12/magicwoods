@@ -8,6 +8,10 @@
   <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script>
+    tailwind = { config: { corePlugins: { preflight: false } } };
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -356,6 +360,241 @@
     }
     .footer-bottom p { color: rgba(255,255,255,0.55); font-size: 0.82rem; }
 
+    /* ── Apartment Scroll Cards ── */
+    .apt-section-header {
+      text-align: center;
+      padding: 5rem 1.5rem 2.5rem;
+      border-top: 1px solid var(--border);
+      background: var(--bg-white);
+    }
+    .apt-section-header .eyebrow {
+      color: var(--accent); font-weight: 700;
+      text-transform: uppercase; font-size: 0.8rem;
+      letter-spacing: 2.5px; margin-bottom: 0.75rem; display: block;
+    }
+    .apt-section-header h2 {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 0.75rem;
+    }
+    .apt-section-header p {
+      color: var(--text-light);
+      font-size: 1rem;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+    .apt-scroll-wrapper {
+      background: #0c0c0c;
+      position: relative;
+    }
+    .apt-card-sticky {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: sticky;
+      top: 0;
+      padding: 0 1rem;
+    }
+    .apt-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      width: min(700px, 94%);
+      height: clamp(340px, 52vh, 470px);
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto;
+      box-shadow: 0 30px 90px rgba(0,0,0,0.7), 0 4px 16px rgba(0,0,0,0.4);
+      overflow: hidden;
+    }
+    .apt-card-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+      transition: transform 0.7s ease;
+    }
+    .apt-card:hover .apt-card-img { transform: scale(1.04); }
+    .apt-card-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+    }
+    .apt-card-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 2.5rem 2rem 1.75rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .apt-card-title {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: clamp(3.8rem, 11vw, 6.8rem);
+      font-weight: 700;
+      line-height: 0.88;
+      letter-spacing: -2px;
+      margin-bottom: 0.65rem;
+    }
+    .apt-card-desc {
+      font-size: clamp(0.85rem, 2vw, 1.05rem);
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      line-height: 1.5;
+      text-transform: lowercase;
+      margin-bottom: 1.1rem;
+      color: rgba(255,255,255,0.88);
+    }
+    .apt-highlights {
+      display: flex;
+      gap: 0.4rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 1.4rem;
+    }
+    .apt-highlight-pill {
+      background: rgba(255,255,255,0.15);
+      color: #fff;
+      padding: 3px 11px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      border: 1px solid rgba(255,255,255,0.25);
+    }
+    .apt-card-cta {
+      display: inline-block;
+      padding: 0.65rem 2.1rem;
+      border: 2px solid rgba(255,255,255,0.9);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      background: transparent;
+      font-family: inherit;
+      transition: background 0.22s, color 0.22s;
+    }
+    .apt-card-cta:hover { background: rgba(255,255,255,0.96); color: #1a1a1a; }
+    .apt-tag {
+      position: absolute;
+      top: 1.1rem;
+      left: 1.1rem;
+      z-index: 3;
+      background: var(--accent);
+      color: #fff;
+      padding: 5px 14px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .apt-card-index {
+      position: absolute;
+      bottom: 0.5rem;
+      right: 1rem;
+      z-index: 3;
+      font-family: Georgia, serif;
+      font-size: 5rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.09);
+      line-height: 1;
+      pointer-events: none;
+    }
+    .apt-scroll-end {
+      height: 80vh;
+      background: #0c0c0c;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 1.5rem;
+      text-align: center;
+      padding: 2rem;
+    }
+    .apt-scroll-end h3 {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: clamp(1.6rem, 4vw, 2.8rem);
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0;
+      line-height: 1.25;
+    }
+    .apt-scroll-end p { color: rgba(255,255,255,0.55); font-size: 1rem; max-width: 400px; }
+    .apt-end-btn {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 0.9rem 2.5rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .apt-end-btn:hover { background: #b8953d; transform: translateY(-2px); }
+
+    /* ── Quote Modal ── */
+    .quote-backdrop {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.82);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 3000; padding: 1.5rem;
+    }
+    .quote-modal {
+      background: #fff; border-radius: 12px;
+      padding: 2.5rem; width: 100%; max-width: 460px;
+      position: relative; animation: modalFadeIn 0.25s ease;
+    }
+    @keyframes modalFadeIn {
+      from { opacity:0; transform: translateY(14px); }
+      to   { opacity:1; transform: none; }
+    }
+    .quote-modal h3 {
+      font-family: Georgia, serif; font-size: 1.5rem;
+      font-weight: 700; color: var(--text-dark); margin-bottom: 0.3rem;
+    }
+    .quote-pkg-badge {
+      display: inline-block; background: var(--accent); color: #fff;
+      padding: 3px 12px; font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1.5rem;
+    }
+    .quote-close {
+      position: absolute; top: 1rem; right: 1rem;
+      background: none; border: none; font-size: 1.4rem;
+      cursor: pointer; color: var(--text-light); line-height: 1;
+    }
+    .q-group { margin-bottom: 1rem; }
+    .q-group label {
+      display: block; font-size: 0.75rem; font-weight: 700;
+      color: var(--text-dark); text-transform: uppercase;
+      letter-spacing: 0.8px; margin-bottom: 0.35rem;
+    }
+    .q-group input, .q-group select {
+      width: 100%; padding: 0.65rem 0.9rem;
+      border: 1.5px solid var(--border); border-radius: 5px;
+      font-size: 0.95rem; font-family: inherit; outline: none;
+      transition: border-color 0.2s;
+    }
+    .q-group input:focus, .q-group select:focus { border-color: var(--primary); }
+    .q-submit {
+      width: 100%; padding: 0.85rem;
+      background: var(--primary); color: #fff; border: none;
+      border-radius: 5px; font-size: 0.9rem; font-weight: 700;
+      letter-spacing: 1px; font-family: inherit; cursor: pointer;
+      margin-top: 0.5rem; transition: background 0.2s, transform 0.2s;
+    }
+    .q-submit:hover { background: var(--primary-light); transform: translateY(-1px); }
+
     /* ── Responsive ── */
     @media (max-width: 900px) {
       .nav-links { display: none; }
@@ -423,6 +662,150 @@
       { cat:'storage',  name:'Corner Storage Solution',                  price:'₹28,000',   original:'₹36,000',   badge:'Sale',    rating:'4.6★', spec:'Maximizes Wasted Space | Rotating Carousel | Easy Access | Custom Dimensions', warranty:'5 Year' },
       { cat:'storage',  name:'Office Desk with Storage Shelves',         price:'₹45,000',   original:'₹58,000',   badge:'Sale',    rating:'4.8★', spec:'Work From Home Ready | Ergonomic Design | Integrated Storage | Cable Management', warranty:'5 Year' },
     ];
+
+    /* ─── Apartment Scroll Cards ─── */
+    const APARTMENT_PACKAGES = [
+      {
+        title: 'Studio',
+        description: 'smart furnishing for compact & independent living',
+        tag: 'From ₹1.2L',
+        src: 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=2940&auto=format&fit=crop',
+        textColor: '#fff',
+        overlayColor: 'linear-gradient(160deg, rgba(26,58,46,0.72) 0%, rgba(0,0,0,0.32) 100%)',
+        highlights: ['Living + Sleep Zone', 'Compact Kitchen', 'Smart Storage'],
+      },
+      {
+        title: '1 BHK',
+        description: 'complete bedroom & living room transformation',
+        tag: 'From ₹2.5L',
+        src: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=2940&auto=format&fit=crop',
+        textColor: '#fff',
+        overlayColor: 'linear-gradient(160deg, rgba(180,118,28,0.68) 0%, rgba(0,0,0,0.28) 100%)',
+        highlights: ['1 Bedroom', 'Living Room', 'Modular Kitchen'],
+      },
+      {
+        title: '2 BHK',
+        description: 'full home design with two bedrooms & modular kitchen',
+        tag: 'From ₹4.8L',
+        src: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?q=80&w=2940&auto=format&fit=crop',
+        textColor: '#fff',
+        overlayColor: 'linear-gradient(160deg, rgba(45,90,74,0.74) 0%, rgba(0,0,0,0.3) 100%)',
+        highlights: ['2 Bedrooms', 'Living + Dining', 'Full Kitchen'],
+      },
+      {
+        title: '3 BHK',
+        description: 'luxury complete home furnishing with premium finishes',
+        tag: 'From ₹8L',
+        src: 'https://images.unsplash.com/photo-1600585154526-990dced4db0d?q=80&w=2940&auto=format&fit=crop',
+        textColor: '#fff',
+        overlayColor: 'linear-gradient(160deg, rgba(12,12,12,0.78) 0%, rgba(0,0,0,0.35) 100%)',
+        highlights: ['3 Bedrooms', 'Living + Dining + Kitchen', 'Balcony & Study'],
+      },
+    ];
+
+    /* ─── Quote Modal ─── */
+    const QuoteModal = ({ pkg, onClose, showToast }) => {
+      const [name,  setName]  = useState('');
+      const [phone, setPhone] = useState('');
+      const [city,  setCity]  = useState('');
+
+      const handleSubmit = e => {
+        e.preventDefault();
+        if (!name.trim() || !phone.trim() || !city) {
+          showToast('Please fill in all fields'); return;
+        }
+        showToast(`${pkg.title} quote request sent! We'll call ${phone} shortly. 📞`);
+        onClose();
+      };
+
+      return (
+        <div className="quote-backdrop" onClick={e => e.target === e.currentTarget && onClose()}>
+          <div className="quote-modal">
+            <button className="quote-close" onClick={onClose} aria-label="Close">✕</button>
+            <h3>Get a Free Quote</h3>
+            <span className="quote-pkg-badge">{pkg.title} · {pkg.tag}</span>
+            <form onSubmit={handleSubmit}>
+              <div className="q-group">
+                <label>Your Name</label>
+                <input type="text" placeholder="e.g. Priya Sharma" value={name} onChange={e => setName(e.target.value)} />
+              </div>
+              <div className="q-group">
+                <label>Phone Number</label>
+                <input type="tel" placeholder="+91 98765 43210" value={phone} onChange={e => setPhone(e.target.value)} />
+              </div>
+              <div className="q-group">
+                <label>City</label>
+                <select value={city} onChange={e => setCity(e.target.value)}>
+                  <option value="" disabled>Select your city</option>
+                  {['Bangalore','Mumbai','Delhi NCR','Hyderabad','Chennai','Pune','Other'].map(c => (
+                    <option key={c}>{c}</option>
+                  ))}
+                </select>
+              </div>
+              <button type="submit" className="q-submit">REQUEST FREE QUOTE →</button>
+            </form>
+          </div>
+        </div>
+      );
+    };
+
+    /* ─── Apartment Card ─── */
+    const ApartmentCard = ({ title, description, tag, src, textColor, i, highlights, overlayColor, onQuote }) => {
+      return (
+        <div className="apt-card-sticky" style={{ zIndex: 10 + i }}>
+          <div className="apt-card">
+            <img className="apt-card-img" src={src} alt={title} loading="lazy" />
+            <div className="apt-card-overlay" style={{ background: overlayColor }} />
+            <span className="apt-tag">{tag}</span>
+            <span className="apt-card-index">{String(i + 1).padStart(2,'0')}</span>
+            <div className="apt-card-content">
+              <div className="apt-card-title" style={{ color: textColor }}>{title}</div>
+              <div className="apt-card-desc">{description}</div>
+              <div className="apt-highlights">
+                {highlights.map(h => (
+                  <span key={h} className="apt-highlight-pill">{h}</span>
+                ))}
+              </div>
+              <button className="apt-card-cta" onClick={() => onQuote({ title, tag })}>
+                GET FREE QUOTE
+              </button>
+            </div>
+          </div>
+        </div>
+      );
+    };
+
+    /* ─── Apartment Packages Section ─── */
+    const ApartmentPackagesSection = ({ showToast }) => {
+      const [quotePkg, setQuotePkg] = useState(null);
+
+      return (
+        <div>
+          <div className="apt-section-header">
+            <div className="container">
+              <span className="eyebrow">Turnkey Home Packages</span>
+              <h2>Choose Your Home Type</h2>
+              <p>Fully furnished interiors — designed, delivered &amp; installed across India</p>
+            </div>
+          </div>
+          <div className="apt-scroll-wrapper">
+            {APARTMENT_PACKAGES.map((pkg, i) => (
+              <ApartmentCard key={pkg.title} {...pkg} i={i} onQuote={setQuotePkg} />
+            ))}
+            <div className="apt-scroll-end">
+              <h3>Ready to transform<br />your home?</h3>
+              <p>Our designers visit your home for free and create a full 3D plan within 24 hours.</p>
+              <button className="apt-end-btn" onClick={() => showToast("Home visit booked! We'll call you shortly. 📞")}>
+                BOOK FREE HOME VISIT
+              </button>
+            </div>
+          </div>
+          {quotePkg && (
+            <QuoteModal pkg={quotePkg} onClose={() => setQuotePkg(null)} showToast={showToast} />
+          )}
+        </div>
+      );
+    };
 
     const CAT_ICON = { kitchen:'🍳', wardrobe:'👕', living:'🛋️', bedroom:'🛏️', dining:'🍽️', storage:'📚' };
 
@@ -739,6 +1122,9 @@
               ))}
             </div>
           </section>
+
+          {/* ── Apartment Scroll Cards ── */}
+          <ApartmentPackagesSection showToast={showToast} />
 
           {/* ── Catalog ── */}
           <section className="section" id="catalog">
