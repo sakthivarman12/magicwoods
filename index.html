@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Magic Woods — Premium Home Furnishing India</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+
+<script src="https://mc.yandex.ru/metrika-tags/_/tag_ec.js" type="text/javascript" charset="utf-8" async></script>
+<script src="https://mc.yandex.ru/metrika/tag_phono.js" type="text/javascript" charset="utf-8" async></script>
+
+<meta name="google-site-verification" content="fiotw8avh--LBXOkNIe33Nh1wzoA81VubZ6qevEflf8">
+
+<!-- Pinterest Tag -->
+<script type="text/javascript">
+  !(function (e) {
+    if (!window.pintrk) {
+      window.pintrk = function () {
+        window.pintrk.queue.push(Array.prototype.slice.call(arguments));
+      };
+      var n = window.pintrk;
+      (n.queue = []), (n.version = '3.0');
+      var t = document.createElement('script');
+      (t.async = !0), (t.src = e);
+      var r = document.getElementsByTagName('script')[0];
+      r.parentNode.insertBefore(t, r);
+    }
+  })('https://s.pinimg.com/ct/core.js');
+  pintrk('load', '2613553294300');
+  pintrk('page');
+</script>
+<noscript>
+  <img height="1" width="1" style="display:none;" alt="" src="https://ct.pinterest.com/v3/?tid=2613553294300&noscript=1">
+</noscript>
+<!-- End Pinterest Tag -->
+
+<!-- Roistat Counter Start -->
+<script>
+(function(w, d, s, h, id) {
+    w.roistatProjectId = id; w.roistatHost = h; w.roistatPage = d.location.href; w.roistatReferrer = d.referrer;
+    var p = d.location.protocol == "https:" ? "https://" : "http://";
+    var u = /^.*roistat_visit=[^;]+(.*)?$/.test(d.cookie) ? "/dist/module.js" : "/api/site/1.0/"+id+"/init?referrer="+encodeURIComponent(d.location.href);
+    var js = d.createElement(s); js.charset="UTF-8"; js.async = 1; js.src = p+h+u; var js2 = d.getElementsByTagName(s)[0]; js2.parentNode.insertBefore(js, js2);
+})(window, document, 'script', 'cloud.roistat.com', '54f1bd4785e82d5c59ec30c2cb090328');
+</script>
+<!-- Roistat Counter End -->
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+  (function (m, e, t, r, i, k, a) {
+    m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments); };
+    m[i].l = 1 * new Date();
+    for (var j = 0; j < document.scripts.length; j++) {
+      if (document.scripts[j].src === r) { return; }
+    }
+    (k = e.createElement(t)), (a = e.getElementsByTagName(t)[0]),
+    (k.async = 1), (k.src = r), a.parentNode.insertBefore(k, a);
+  })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js', 'ym');
+  ym(101665336, 'init', {
+    webvisor: true,
+    clickmap: true,
+    ecommerce: 'dataLayer',
+    accurateTrackBounce: true,
+    trackLinks: true,
+  });
+</script>
+<noscript>
+  <div><img src="https://mc.yandex.ru/watch/101665336" style="position:absolute; left:-9999px;" alt=""></div>
+</noscript>
+<!-- /Yandex.Metrika counter -->
+
+<script type="text/javascript">
+  (function (c, l, a, r, i, t, y) {
+    c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments); };
+    t = l.createElement(r);
+    t.async = 1;
+    t.src = 'https://www.clarity.ms/tag/' + i;
+    y = l.getElementsByTagName(r)[0];
+    y.parentNode.insertBefore(t, y);
+  })(window, document, 'clarity', 'script', 'ryuxqgx0lt');
+</script>
+
+<!-- ClickCease.com tracking -->
+<script type="text/javascript">
+  var script = document.createElement('script');
+  script.async = true;
+  script.type = 'text/javascript';
+  var target = 'https://www.clickcease.com/monitor/stat.js';
+  script.src = target;
+  var elem = document.head;
+  elem.appendChild(script);
+</script>
+<noscript>
+  <a href="https://www.clickcease.com" rel="nofollow"><img src="https://monitor.clickcease.com" alt="ClickCease"></a>
+</noscript>
+<!-- End ClickCease.com tracking -->
+</head>
+<body>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track" id="ticker"></div>
+</div>
+
+<!-- NAV -->
+<header class="site-header">
+  <nav>
+    <a href="#" class="nav-logo">Magic Woods</a>
+    <div class="nav-toggle">
+      <button class="nav-toggle-btn active" id="btnPackages" onclick="switchNav('packages')">Packages</button>
+      <button class="nav-toggle-btn" id="btnItems" onclick="switchNav('items')">Items shop</button>
+    </div>
+    <div class="nav-right">
+      <span class="nav-phone">+91 98765 43210</span>
+      <a href="https://wa.me/919876543210" class="nav-wa">WhatsApp</a>
+      <span class="nav-cart">Cart <span class="cart-badge" id="cartBadge">0</span></span>
+    </div>
+  </nav>
+  <div class="sub-nav" id="subNav">
+    <div class="sub-nav-section" id="subNavPackages">
+      <a href="#packages" class="sub-nav-link">All Packages</a>
+      <a href="#packages" class="sub-nav-link" data-filter="studio">Studio</a>
+      <a href="#packages" class="sub-nav-link" data-filter="1bhk">1 BHK</a>
+      <a href="#packages" class="sub-nav-link" data-filter="2bhk">2 BHK</a>
+      <a href="#packages" class="sub-nav-link" data-filter="3bhk">3 BHK</a>
+      <a href="#packages" class="sub-nav-link" data-filter="villa">Villa</a>
+      <a href="#packages" class="sub-nav-link" data-filter="holiday">Holiday Home</a>
+      <a href="#packages" class="sub-nav-link" data-filter="kids">Kids</a>
+      <a href="#packages" class="sub-nav-link" data-filter="office">Office</a>
+      <a href="#packages" class="sub-nav-link" data-filter="outdoor">Outdoor Set</a>
+    </div>
+    <div class="sub-nav-section hidden" id="subNavItems">
+      <a href="#complete" class="sub-nav-link sub-nav-drop">Furniture <span class="sub-nav-arrow">▾</span></a>
+      <a href="#complete" class="sub-nav-link">Kitchens &amp; Built-In</a>
+      <a href="#complete" class="sub-nav-link sub-nav-drop">Home Decor <span class="sub-nav-arrow">▾</span></a>
+      <a href="#complete" class="sub-nav-link">Clearance</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-video-wrap">
+    <iframe
+      src="https://www.youtube.com/embed/L0PSxBh31NI?autoplay=1&mute=1&loop=1&playlist=L0PSxBh31NI&controls=0&disablekb=1&fs=0&iv_load_policy=3&modestbranding=1&rel=0&playsinline=1"
+      frameborder="0"
+      allow="autoplay; encrypted-media; picture-in-picture"
+      allowfullscreen
+      title="Magic Woods — Home Furnishing India"></iframe>
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-inner">
+    <p class="hero-eye">Premium Home Furnishing — India</p>
+    <h1 class="hero-title">Furnishing of apartments<br><em>All Over India</em></h1>
+    <p class="hero-sub">From empty walls to a fully furnished home</p>
+    <div class="hero-cta">
+      <a href="#packages" class="btn-primary">Explore Packages</a>
+      <a href="#contact" class="btn-outline">Book Free Visit</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-num">5,000+</div><div class="stat-label">Homes Furnished</div></div>
+      <div class="stat"><div class="stat-num">7</div><div class="stat-label">Days Average Turnaround</div></div>
+      <div class="stat"><div class="stat-num">1</div><div class="stat-label">Contractor for Complete Furnishings</div></div>
+      <div class="stat"><div class="stat-num">4.9★</div><div class="stat-label">Average Rating</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- VISIT STRIP -->
+<div class="visit-strip">
+  <div>
+    <h3>Free home visit &amp; measurements</h3>
+    <p>We visit your home, assess the layout, and recommend the right package for your budget — at no cost.</p>
+  </div>
+  <a href="#contact" class="btn-dark">Book a Visit</a>
+</div>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="container">
+    <p class="section-eye">How it works</p>
+    <h2 class="section-title">3 steps to a<br><em>ready apartment</em></h2>
+    <div class="steps-grid">
+      <div class="step">
+        <div class="step-img">
+          <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=700&q=80" alt="Choose a package" loading="lazy">
+        </div>
+        <p class="step-num">01</p>
+        <h3>Choose a Package</h3>
+        <p>Select a collection and size on the website — all packages are tailored to popular Indian BHK layouts.</p>
+      </div>
+      <div class="step">
+        <div class="step-img">
+          <img src="https://images.unsplash.com/photo-1556745753-b2904692b3cd?w=700&q=80" alt="Confirm on WhatsApp" loading="lazy">
+        </div>
+        <p class="step-num">02</p>
+        <h3>Confirm via WhatsApp</h3>
+        <p>A manager will contact you within 30 minutes to confirm details and schedule delivery.</p>
+      </div>
+      <div class="step">
+        <div class="step-img">
+          <img src="https://images.unsplash.com/photo-1600210492493-0946911123ea?w=700&q=80" alt="Move right in" loading="lazy">
+        </div>
+        <p class="step-num">03</p>
+        <h3>Move In</h3>
+        <p>We deliver, assemble, and clean up in one day. Your apartment is ready — just move in.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PACKAGES -->
+<section class="packages-section" id="packages">
+  <div class="container">
+    <p class="section-eye">Furniture Packages</p>
+    <h2 class="section-title">Discover furniture<br><em>packages</em></h2>
+    <div class="pkg-tabs" id="pkgTabs"></div>
+    <div class="pkg-grid" id="pkgGrid"></div>
+  </div>
+</section>
+
+<!-- SPOTLIGHT -->
+<div class="spotlight" id="spotlight">
+  <div class="spotlight-inner">
+    <div class="spotlight-visual">
+      <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=900&q=85" alt="Aranya Collection" loading="lazy">
+    </div>
+    <div class="spotlight-content">
+      <p class="spotlight-eye">Our Bestseller</p>
+      <h2 class="spotlight-title">The Forest Zen<br><em>Collection</em></h2>
+      <p class="spotlight-desc">Earthy warmth meets contemporary craft. Forest Zen draws from the natural world — warm tones, organic textures, and calming palettes that make every room feel grounded and effortlessly modern.</p>
+      <div class="spotlight-items">
+        <div class="spotlight-item"><span class="spotlight-item-name">Cloud Boucle Sectional</span><span class="spotlight-item-tag">Living Room</span></div>
+        <div class="spotlight-item"><span class="spotlight-item-name">Solid Wood Dining Table</span><span class="spotlight-item-tag">Dining</span></div>
+        <div class="spotlight-item"><span class="spotlight-item-name">Woven Cane King Bed</span><span class="spotlight-item-tag">Bedroom</span></div>
+        <div class="spotlight-item"><span class="spotlight-item-name">Oak Sideboard &amp; Storage</span><span class="spotlight-item-tag">Storage</span></div>
+        <div class="spotlight-item"><span class="spotlight-item-name">Handwoven Wool Rug 8×10</span><span class="spotlight-item-tag">Décor</span></div>
+      </div>
+      <a href="#contact" class="btn-accent">Shop This Collection</a>
+    </div>
+  </div>
+</div>
+
+<!-- FINDER -->
+<section class="finder-section" id="finder">
+  <div class="container">
+    <div class="finder-wrap">
+      <p class="section-eye">Package Finder</p>
+      <h2 class="section-title">Find your<br><em>perfect package</em></h2>
+      <div class="finder-steps-nav" id="finderNav"></div>
+      <div id="finderSteps"></div>
+      <div style="margin-top:20px" id="finderBtns">
+        <button class="btn-dark" id="finderNext">Next →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section id="benefits">
+  <div class="container">
+    <p class="section-eye">Why furniture packages</p>
+    <h2 class="section-title">Why choose<br><em>furniture packages?</em></h2>
+    <div class="benefits-grid">
+      <div class="benefit-card">
+        <div class="benefit-img">
+          <img src="img/benefit-1.jpg" alt="Turnkey furniture packages in 1 day" loading="lazy">
+        </div>
+        <p class="benefit-num">01</p>
+        <h3>Turnkey furniture packages in 1 day</h3>
+        <p>Furniture, appliances, curtains, smart home, and décor — all from one contractor in one complete home furniture package.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-img">
+          <img src="img/benefit-2.jpg" alt="Tailored to your preferences" loading="lazy">
+        </div>
+        <p class="benefit-num">02</p>
+        <h3>Tailored to your preferences</h3>
+        <p>You can change materials, colors, and furniture package contents — get the interior you really want.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-img">
+          <img src="img/benefit-3.jpg" alt="Design already done for you" loading="lazy">
+        </div>
+        <p class="benefit-num">03</p>
+        <h3>Design already done for you</h3>
+        <p>For any style and budget — from minimalism to art deco. All items are curated to match and fit popular Indian BHK layouts.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPLETE HOME -->
+<section class="complete-section" id="complete">
+  <div class="complete-head container">
+    <p class="section-eye">Everything Included</p>
+    <h2 class="section-title">Complete your<br><em>home</em></h2>
+  </div>
+  <div class="complete-tabs" id="completeTabs"></div>
+  <div id="completePanels"></div>
+</section>
+
+<!-- GALLERY STRIP -->
+<div class="gallery-strip" id="galleryStrip"></div>
+
+<!-- SHOWROOM BANNER -->
+<div class="showroom-banner">
+  <img src="img/showroom.jpg" alt="Magic Woods Showroom" loading="lazy">
+  <div class="showroom-overlay"></div>
+  <div class="showroom-content">
+    <p>Experience Centres</p>
+    <h2>Coming soon —<br><em>Showrooms across India</em></h2>
+  </div>
+</div>
+
+<!-- REVIEWS -->
+<section class="reviews-section" id="reviews">
+  <div class="container">
+    <div class="reviews-header">
+      <div>
+        <p class="section-eye">Customer Stories</p>
+        <h2 class="section-title">Over 5,000 happy<br><em>homes across India</em></h2>
+      </div>
+      <div class="reviews-score">
+        <div class="score-num">4.9</div>
+        <div>
+          <div class="score-stars">★★★★★</div>
+          <div class="score-count">384 verified reviews</div>
+        </div>
+      </div>
+    </div>
+    <div class="reviews-grid" id="reviewsGrid"></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="contact-inner">
+    <p class="section-eye">Get in Touch</p>
+    <h2 class="section-title">Tell us about<br><em>your home</em></h2>
+    <p>Share your apartment size and preferences. We come back with a curated package and fixed price within one business day.</p>
+    <div class="apt-opts" id="aptOpts">
+      <div class="apt-opt">Studio</div>
+      <div class="apt-opt">1 BHK</div>
+      <div class="apt-opt">2 BHK</div>
+      <div class="apt-opt">3 BHK</div>
+      <div class="apt-opt">Villa</div>
+      <div class="apt-opt">Holiday Home</div>
+      <div class="apt-opt">Kids Room</div>
+      <div class="apt-opt">Office</div>
+      <div class="apt-opt">Outdoor Set</div>
+    </div>
+    <form class="contact-form" id="contactForm">
+      <input type="text" placeholder="Your Name" required>
+      <input type="tel" placeholder="WhatsApp Number" required>
+      <input type="email" placeholder="Email Address">
+      <input type="text" placeholder="City — Mumbai, Delhi, Bangalore…">
+      <button type="submit" class="btn-accent" style="padding:15px;cursor:pointer;font-family:var(--sans);font-weight:600;font-size:.82rem;text-transform:uppercase;letter-spacing:.06em">Send My Requirements →</button>
+    </form>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <div class="container">
+    <p class="section-eye">Questions</p>
+    <h2 class="section-title">Things people<br><em>ask us</em></h2>
+    <div class="faq-grid" id="faqGrid"></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="nav-logo">Magic Woods</a>
+        <p>India's premium home furnishing service. Fully styled, delivered in 10 days. Serving 6 cities and growing.</p>
+        <div class="footer-social">
+          <a href="#">in</a><a href="#">ig</a><a href="#">fb</a><a href="#">yt</a><a href="#">pi</a>
+        </div>
+      </div>
+      <div>
+        <h5>Packages</h5>
+        <ul>
+          <li><a href="#">Studio</a></li><li><a href="#">1 BHK</a></li><li><a href="#">2 BHK</a></li>
+          <li><a href="#">3 BHK</a></li><li><a href="#">Villa</a></li><li><a href="#">Holiday Home</a></li><li><a href="#">Kids</a></li><li><a href="#">Office</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Support</h5>
+        <ul>
+          <li><a href="#">Shipping &amp; Delivery</a></li><li><a href="#">Installation Guide</a></li>
+          <li><a href="#">Warranty &amp; Returns</a></li><li><a href="#">Track Your Order</a></li><li><a href="#">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Contact</h5>
+        <ul>
+          <li><a href="#">📞 +91 98765 43210</a></li><li><a href="#">💬 WhatsApp Us</a></li>
+          <li><a href="#">✉️ hello@magicwoods.in</a></li>
+          <li><a href="#">📍 Mumbai · Delhi · Bangalore</a></li><li><a href="#">📍 Hyderabad · Pune · Chennai</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Magic Woods India Pvt. Ltd. · Privacy · Terms · GST: 27AAAAA0000A1Z5</span>
+      <div class="footer-pay">
+        <span class="pay-badge">UPI</span><span class="pay-badge">EMI</span>
+        <span class="pay-badge">Visa</span><span class="pay-badge">MC</span><span class="pay-badge">RazorPay</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<a class="wa-float" href="https://wa.me/919876543210" title="Chat on WhatsApp">💬</a>
+
+<script src="js/script.js"></script>
+</body>
+</html>

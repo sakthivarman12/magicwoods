@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Magic Woods — Premium Home Furnishing India</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --cream:#F9F7F2;--dark:#0C1A11;--primary:#1A3828;--accent:#C07A28;
+  --text:#1C1C1A;--muted:#726E67;--border:#E1DCD4;--card:#F1ECE4;--white:#fff;
+  --serif:'Cormorant Garamond',Georgia,serif;--sans:'DM Sans',system-ui,sans-serif;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--cream);color:var(--text);font-size:16px;line-height:1.6;overflow-x:hidden}
+
+/* TICKER */
+.ticker{background:var(--primary);color:rgba(255,255,255,0.85);font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;overflow:hidden;height:36px;display:flex;align-items:center}
+.ticker-track{display:flex;gap:64px;animation:tick 28s linear infinite;white-space:nowrap}
+@keyframes tick{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.ticker-sep{color:var(--accent);margin:0 8px}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:var(--white);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:64px}
+.nav-logo{font-family:var(--serif);font-size:1.5rem;font-weight:600;color:var(--primary);letter-spacing:.03em;text-decoration:none}
+.nav-links{display:flex;gap:0;list-style:none}
+.nav-links a{display:block;padding:0 18px;height:64px;line-height:64px;font-size:.8rem;font-weight:500;color:var(--text);text-decoration:none;letter-spacing:.06em;text-transform:uppercase;transition:color .2s}
+.nav-links a:hover{color:var(--primary)}
+.nav-right{display:flex;align-items:center;gap:16px}
+.nav-phone{font-size:.78rem;color:var(--muted);font-weight:500}
+.nav-wa{background:var(--primary);color:var(--white);padding:8px 16px;border-radius:2px;font-size:.75rem;font-weight:600;text-decoration:none;letter-spacing:.05em;text-transform:uppercase;transition:background .2s}
+.nav-wa:hover{background:#26503a}
+.nav-cart{font-size:.8rem;font-weight:500;cursor:pointer;color:var(--text);display:flex;align-items:center;gap:6px}
+.cart-badge{background:var(--accent);color:var(--white);border-radius:50%;width:18px;height:18px;font-size:10px;display:flex;align-items:center;justify-content:center;font-weight:700}
+
+/* HERO */
+.hero{position:relative;height:100vh;min-height:640px;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;animation:zoomIn 20s ease-in-out infinite alternate}
+@keyframes zoomIn{0%{transform:scale(1)}100%{transform:scale(1.08)}}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(160deg,rgba(12,26,17,.82) 0%,rgba(12,26,17,.55) 60%,rgba(12,26,17,.4) 100%)}
+.hero-inner{position:relative;text-align:center;color:var(--white);padding:0 24px;max-width:820px}
+.hero-eye{font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:24px;font-weight:500}
+.hero-title{font-family:var(--serif);font-size:clamp(3rem,6.5vw,5.8rem);font-weight:300;line-height:1.08;margin-bottom:32px;text-wrap:pretty}
+.hero-title em{font-style:italic;color:rgba(255,255,255,.72)}
+.hero-cta{display:inline-flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-bottom:56px}
+.btn-primary{background:var(--white);color:var(--primary);padding:14px 34px;font-weight:600;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;border:none;cursor:pointer;text-decoration:none;transition:all .2s;display:inline-block}
+.btn-primary:hover{background:var(--accent);color:var(--white)}
+.btn-outline{background:transparent;color:var(--white);padding:14px 34px;font-weight:500;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;border:1px solid rgba(255,255,255,.4);cursor:pointer;text-decoration:none;transition:all .2s;display:inline-block}
+.btn-outline:hover{border-color:var(--white)}
+.hero-stats{display:flex;gap:0;border-top:1px solid rgba(255,255,255,.15)}
+.stat{flex:1;padding:26px 20px;border-right:1px solid rgba(255,255,255,.15);text-align:center}
+.stat:last-child{border-right:none}
+.stat-num{font-family:var(--serif);font-size:2.4rem;font-weight:300;line-height:1;color:var(--white)}
+.stat-label{font-size:.7rem;color:rgba(255,255,255,.48);letter-spacing:.1em;text-transform:uppercase;margin-top:4px;font-weight:500}
+
+/* STRIP */
+.visit-strip{background:var(--card);border-bottom:1px solid var(--border);padding:30px 48px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.visit-strip h3{font-family:var(--serif);font-size:1.55rem;font-weight:400;color:var(--primary)}
+.visit-strip p{color:var(--muted);font-size:.88rem;margin-top:4px}
+
+/* BUTTONS */
+.btn-dark{background:var(--primary);color:var(--white);padding:13px 30px;font-weight:600;font-size:.8rem;letter-spacing:.05em;text-transform:uppercase;border:none;cursor:pointer;white-space:nowrap;transition:background .2s;text-decoration:none;display:inline-block}
+.btn-dark:hover{background:#26503a}
+.btn-accent{background:var(--accent);color:var(--white);padding:13px 30px;font-weight:600;font-size:.8rem;letter-spacing:.05em;text-transform:uppercase;border:none;cursor:pointer;transition:background .2s;text-decoration:none;display:inline-block}
+.btn-accent:hover{background:#a86a20}
+
+/* SECTIONS */
+section{padding:88px 48px}
+.container{max-width:1280px;margin:0 auto}
+.section-eye{font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:14px}
+.section-title{font-family:var(--serif);font-size:clamp(2rem,3.5vw,3rem);font-weight:300;line-height:1.2;color:var(--primary);text-wrap:pretty}
+.section-title em{font-style:italic}
+
+/* STEPS */
+.steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:56px}
+.step{display:flex;flex-direction:column;gap:14px}
+.step-img{height:220px;border-radius:2px;overflow:hidden;position:relative}
+.step-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.step:hover .step-img img{transform:scale(1.04)}
+.step-num{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);font-weight:600}
+.step h3{font-family:var(--serif);font-size:1.35rem;font-weight:400;color:var(--primary)}
+.step p{font-size:.875rem;color:var(--muted);line-height:1.75}
+
+/* PACKAGES */
+.packages-section{background:var(--white);padding:88px 48px}
+.pkg-tabs{display:flex;gap:0;border-bottom:1px solid var(--border);margin-top:44px;overflow-x:auto;scrollbar-width:none}
+.pkg-tabs::-webkit-scrollbar{display:none}
+.pkg-tab{padding:13px 22px;font-size:.78rem;font-weight:500;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;transition:all .2s;user-select:none}
+.pkg-tab.active{color:var(--primary);border-bottom-color:var(--primary)}
+.pkg-tab:hover{color:var(--primary)}
+.pkg-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:36px}
+.pkg-card{cursor:pointer;transition:transform .25s}
+.pkg-card:hover{transform:translateY(-5px)}
+.pkg-img{aspect-ratio:3/4;border-radius:2px;position:relative;overflow:hidden;margin-bottom:14px;background:var(--card)}
+.pkg-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.pkg-card:hover .pkg-img img{transform:scale(1.05)}
+.pkg-badge{position:absolute;top:12px;left:12px;background:var(--primary);color:var(--white);font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;z-index:2}
+.pkg-name{font-family:var(--serif);font-size:1.05rem;font-weight:400;color:var(--primary)}
+.pkg-rating{font-size:.78rem;color:var(--muted);margin-top:2px}
+.pkg-price{font-size:.88rem;color:var(--text);font-weight:600;margin-top:5px}
+.pkg-price span{font-weight:300;font-size:.78rem;color:var(--muted)}
+
+/* SPOTLIGHT */
+.spotlight{overflow:hidden}
+.spotlight-inner{display:grid;grid-template-columns:1fr 1fr;min-height:600px}
+.spotlight-visual{position:relative;overflow:hidden}
+.spotlight-visual img{width:100%;height:100%;object-fit:cover;transition:transform .8s}
+.spotlight-visual:hover img{transform:scale(1.04)}
+.spotlight-content{color:var(--white);background:var(--dark);padding:76px 60px;display:flex;flex-direction:column;justify-content:center}
+.spotlight-eye{font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:18px}
+.spotlight-title{font-family:var(--serif);font-size:clamp(2.2rem,3.5vw,3.4rem);font-weight:300;line-height:1.12;margin-bottom:20px}
+.spotlight-desc{color:rgba(255,255,255,.58);font-size:.92rem;line-height:1.82;margin-bottom:36px;max-width:400px}
+.spotlight-items{display:flex;flex-direction:column;gap:0;margin-bottom:36px;border-top:1px solid rgba(255,255,255,.1)}
+.spotlight-item{display:flex;justify-content:space-between;align-items:center;padding:13px 0;border-bottom:1px solid rgba(255,255,255,.1);font-size:.85rem}
+.spotlight-item-name{color:rgba(255,255,255,.72)}
+.spotlight-item-tag{color:rgba(255,255,255,.3);font-size:.72rem;letter-spacing:.04em}
+
+/* FINDER */
+.finder-section{background:var(--card)}
+.finder-wrap{max-width:680px;margin:0 auto}
+.finder-steps-nav{display:flex;gap:0;margin:44px 0 36px;border-bottom:1px solid var(--border)}
+.finder-step-btn{flex:1;padding:15px;text-align:center;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;font-weight:500;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;user-select:none}
+.finder-step-btn.active{color:var(--primary);border-bottom-color:var(--accent)}
+.finder-q{display:none}
+.finder-q.active{display:block}
+.finder-q h3{font-family:var(--serif);font-size:1.75rem;font-weight:400;color:var(--primary);margin-bottom:26px}
+.finder-opts{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.finder-opt{padding:16px;border:1px solid var(--border);background:var(--white);cursor:pointer;text-align:center;font-size:.875rem;font-weight:500;color:var(--text);transition:all .2s;border-radius:2px;user-select:none}
+.finder-opt:hover,.finder-opt.selected{border-color:var(--primary);background:var(--primary);color:var(--white)}
+.finder-form{display:flex;flex-direction:column;gap:14px;margin-top:8px}
+.finder-form input{padding:14px 18px;border:1px solid var(--border);background:var(--white);font-size:.95rem;font-family:var(--sans);outline:none;border-radius:2px;color:var(--text);transition:border .2s}
+.finder-form input:focus{border-color:var(--primary)}
+.finder-form small{font-size:.78rem;color:var(--muted)}
+
+/* BENEFITS */
+.benefits-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:56px}
+.benefit-card{}
+.benefit-img{height:280px;border-radius:2px;overflow:hidden;position:relative;margin-bottom:18px}
+.benefit-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.benefit-card:hover .benefit-img img{transform:scale(1.05)}
+.benefit-num{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:7px}
+.benefit-card h3{font-family:var(--serif);font-size:1.3rem;font-weight:400;color:var(--primary);margin-bottom:9px}
+.benefit-card p{font-size:.875rem;color:var(--muted);line-height:1.78}
+
+/* COMPLETE HOME */
+.complete-section{background:var(--white);padding:88px 0 0}
+.complete-head{padding:0 48px}
+.complete-tabs{display:flex;gap:0;margin:44px 48px 0;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid var(--border)}
+.complete-tabs::-webkit-scrollbar{display:none}
+.complete-tab{padding:13px 26px;font-size:.78rem;font-weight:500;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;transition:all .2s;user-select:none}
+.complete-tab.active{color:var(--primary);border-bottom-color:var(--accent)}
+.complete-tab:hover{color:var(--primary)}
+.complete-panel{display:none;grid-template-columns:1fr 1fr;min-height:440px}
+.complete-panel.active{display:grid}
+.complete-visual{overflow:hidden;position:relative}
+.complete-visual img{width:100%;height:100%;min-height:440px;object-fit:cover;transition:transform .6s}
+.complete-panel:hover .complete-visual img{transform:scale(1.04)}
+.complete-text{padding:60px 48px;display:flex;flex-direction:column;justify-content:center;background:var(--white)}
+.complete-text h3{font-family:var(--serif);font-size:1.8rem;font-weight:400;color:var(--primary);margin-bottom:14px}
+.complete-text p{font-size:.9rem;color:var(--muted);line-height:1.82;margin-bottom:28px}
+
+/* GALLERY STRIP */
+.gallery-strip{display:grid;grid-template-columns:repeat(5,1fr);gap:3px;margin-top:3px}
+.gallery-cell{height:200px;overflow:hidden;cursor:pointer}
+.gallery-cell img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.gallery-cell:hover img{transform:scale(1.08)}
+
+/* REVIEWS */
+.reviews-section{padding:88px 48px;background:var(--cream)}
+.reviews-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:44px}
+.reviews-score{display:flex;align-items:center;gap:16px}
+.score-num{font-family:var(--serif);font-size:3.8rem;font-weight:300;color:var(--primary);line-height:1}
+.score-stars{color:var(--accent);font-size:1.1rem;letter-spacing:2px}
+.score-count{font-size:.82rem;color:var(--muted);margin-top:4px}
+.reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.review-card{background:var(--white);padding:26px;border:1px solid var(--border);border-radius:2px}
+.review-photos{display:flex;gap:5px;margin-bottom:14px;overflow:hidden;border-radius:2px}
+.review-photo{width:56px;height:56px;object-fit:cover;flex-shrink:0;border-radius:1px}
+.review-author{font-weight:600;font-size:.88rem;color:var(--text)}
+.review-pkg{font-size:.72rem;color:var(--muted);margin-top:2px}
+.review-stars{color:var(--accent);margin:9px 0 7px;font-size:.82rem;letter-spacing:2px}
+.review-text{font-size:.85rem;color:var(--muted);line-height:1.75}
+.review-date{font-size:.72rem;color:#c9c2bb;margin-top:10px}
+
+/* SHOWROOM */
+.showroom-banner{position:relative;height:360px;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.showroom-banner img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.showroom-overlay{position:absolute;inset:0;background:rgba(12,26,17,.62)}
+.showroom-content{position:relative;text-align:center;color:var(--white)}
+.showroom-content p{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:12px}
+.showroom-content h2{font-family:var(--serif);font-size:clamp(2rem,4vw,3rem);font-weight:300;line-height:1.2}
+
+/* CONTACT */
+.contact-section{background:var(--primary);padding:88px 48px}
+.contact-inner{max-width:780px;margin:0 auto;text-align:center}
+.contact-inner .section-title{color:var(--white)}
+.contact-inner .section-eye{color:var(--accent)}
+.contact-inner>p{color:rgba(255,255,255,.58);margin:14px 0 44px;font-size:.92rem}
+.apt-opts{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:28px}
+.apt-opt{padding:11px 20px;border:1px solid rgba(255,255,255,.25);color:rgba(255,255,255,.65);font-size:.82rem;font-weight:500;cursor:pointer;transition:all .2s;border-radius:2px;user-select:none}
+.apt-opt:hover,.apt-opt.selected{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.65);color:var(--white)}
+.contact-form{display:flex;flex-direction:column;gap:12px;max-width:460px;margin:0 auto}
+.contact-form input{padding:14px 18px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);color:var(--white);font-family:var(--sans);font-size:.92rem;outline:none;border-radius:2px;transition:border .2s}
+.contact-form input::placeholder{color:rgba(255,255,255,.38)}
+.contact-form input:focus{border-color:rgba(255,255,255,.55)}
+
+/* FAQ */
+.faq-section{padding:88px 48px;background:var(--cream)}
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-top:56px;border-top:1px solid var(--border)}
+.faq-item{padding:26px 0;border-bottom:1px solid var(--border);cursor:pointer}
+.faq-item:nth-child(odd){padding-right:48px;border-right:1px solid var(--border)}
+.faq-item:nth-child(even){padding-left:48px}
+.faq-q{font-family:var(--serif);font-size:1.02rem;font-weight:400;color:var(--primary);display:flex;justify-content:space-between;align-items:center;gap:10px}
+.faq-icon{font-size:1.1rem;color:var(--accent);flex-shrink:0;transition:transform .2s;font-style:normal}
+.faq-item.open .faq-icon{transform:rotate(45deg)}
+.faq-a{display:none;font-size:.875rem;color:var(--muted);line-height:1.82;margin-top:12px}
+.faq-item.open .faq-a{display:block}
+
+/* FOOTER */
+footer{background:var(--dark);color:rgba(255,255,255,.65);padding:60px 48px 28px}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:44px;margin-bottom:44px}
+.footer-brand .nav-logo{color:var(--white);display:block;margin-bottom:14px}
+.footer-brand p{font-size:.82rem;color:rgba(255,255,255,.38);line-height:1.75;max-width:270px}
+.footer-social{display:flex;gap:10px;margin-top:18px}
+.footer-social a{width:34px;height:34px;border:1px solid rgba(255,255,255,.13);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.45);text-decoration:none;font-size:.72rem;transition:all .2s;border-radius:2px}
+.footer-social a:hover{border-color:rgba(255,255,255,.45);color:var(--white)}
+footer h5{font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.38);margin-bottom:14px;font-weight:600}
+footer ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+footer ul li a{color:rgba(255,255,255,.48);text-decoration:none;font-size:.82rem;transition:color .2s}
+footer ul li a:hover{color:var(--white)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.08);padding-top:22px;display:flex;justify-content:space-between;align-items:center;font-size:.72rem;color:rgba(255,255,255,.22)}
+.footer-pay{display:flex;gap:6px;align-items:center}
+.pay-badge{background:rgba(255,255,255,.07);padding:4px 9px;border-radius:2px;font-size:.68rem;color:rgba(255,255,255,.32)}
+
+/* WA FLOAT */
+.wa-float{position:fixed;bottom:26px;right:26px;z-index:90;background:#25D366;color:var(--white);width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(0,0,0,.25);text-decoration:none;font-size:1.35rem;transition:transform .2s}
+.wa-float:hover{transform:scale(1.08)}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  nav{padding:0 20px}.nav-links{display:none}
+  section,.packages-section,.contact-section,.faq-section,.reviews-section{padding:60px 20px}
+  .steps-grid,.benefits-grid,.reviews-grid{grid-template-columns:1fr}
+  .pkg-grid{grid-template-columns:repeat(2,1fr)}
+  .spotlight-inner{grid-template-columns:1fr}.spotlight-visual{height:320px}
+  .complete-panel.active{grid-template-columns:1fr}.complete-visual{height:260px}
+  .faq-grid{grid-template-columns:1fr}
+  .faq-item:nth-child(odd){padding-right:0;border-right:none}
+  .faq-item:nth-child(even){padding-left:0}
+  .footer-grid{grid-template-columns:1fr 1fr}.footer-bottom{flex-direction:column;gap:10px}
+  .visit-strip{flex-direction:column;text-align:center;padding:24px 20px}
+  .hero-stats{flex-direction:column}
+  .stat{border-right:none;border-bottom:1px solid rgba(255,255,255,.1)}
+  .finder-opts{grid-template-columns:1fr 1fr}
+  .gallery-strip{grid-template-columns:repeat(3,1fr)}
+  .complete-head,.complete-tabs{padding-left:20px;padding-right:20px}
+}
+</style>
+</head>
+<body>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track" id="ticker"></div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Magic Woods</a>
+  <ul class="nav-links">
+    <li><a href="#packages">Packages</a></li>
+    <li><a href="#finder">Find Yours</a></li>
+    <li><a href="#complete">Included</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <span class="nav-phone">+91 98765 43210</span>
+    <a href="https://wa.me/919876543210" class="nav-wa">WhatsApp</a>
+    <span class="nav-cart">Cart <span class="cart-badge" id="cartBadge">0</span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <img class="hero-img" src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1920&q=85" alt="Premium Indian Interior" loading="eager">
+  <div class="hero-overlay"></div>
+  <div class="hero-inner">
+    <p class="hero-eye">Premium Home Furnishing — India</p>
+    <h1 class="hero-title">From empty walls<br>to a <em>fully furnished</em><br>home, in 10 days.</h1>
+    <div class="hero-cta">
+      <a href="#packages" class="btn-primary">Explore Packages</a>
+      <a href="#contact" class="btn-outline">Book Free Visit</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-num">5,000+</div><div class="stat-label">Homes Furnished</div></div>
+      <div class="stat"><div class="stat-num">10</div><div class="stat-label">Days Turnaround</div></div>
+      <div class="stat"><div class="stat-num">1</div><div class="stat-label">Team for Everything</div></div>
+      <div class="stat"><div class="stat-num">4.9★</div><div class="stat-label">Average Rating</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- VISIT STRIP -->
+<div class="visit-strip">
+  <div>
+    <h3>Free home visit &amp; measurements</h3>
+    <p>We visit your home, assess the layout, and recommend the right package for your budget — at no cost.</p>
+  </div>
+  <a href="#contact" class="btn-dark">Book a Visit</a>
+</div>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="container">
+    <p class="section-eye">How it works</p>
+    <h2 class="section-title">3 steps to a<br><em>ready home</em></h2>
+    <div class="steps-grid">
+      <div class="step">
+        <div class="step-img">
+          <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=700&q=80" alt="Choose a package" loading="lazy">
+        </div>
+        <p class="step-num">Step 01</p>
+        <h3>Choose a Package</h3>
+        <p>Browse our curated BHK collections — each styled for popular Indian home layouts, from 1BHK to sprawling villas.</p>
+      </div>
+      <div class="step">
+        <div class="step-img">
+          <img src="https://images.unsplash.com/photo-1556745753-b2904692b3cd?w=700&q=80" alt="Confirm on WhatsApp" loading="lazy">
+        </div>
+        <p class="step-num">Step 02</p>
+        <h3>Confirm on WhatsApp</h3>
+        <p>Our design advisor contacts you within 30 minutes to confirm dimensions, finishes, and schedule delivery.</p>
+      </div>
+      <div class="step">
+        <div class="step-img">
+          <img src="https://images.unsplash.com/photo-1600210492493-0946911123ea?w=700&q=80" alt="Move right in" loading="lazy">
+        </div>
+        <p class="step-num">Step 03</p>
+        <h3>Move Right In</h3>
+        <p>We deliver, assemble, arrange, and clean up — all in one day. Your home is ready. Just unlock the door.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PACKAGES -->
+<section class="packages-section" id="packages">
+  <div class="container">
+    <p class="section-eye">Furniture Packages</p>
+    <h2 class="section-title">Discover our<br><em>collections</em></h2>
+    <div class="pkg-tabs" id="pkgTabs"></div>
+    <div class="pkg-grid" id="pkgGrid"></div>
+  </div>
+</section>
+
+<!-- SPOTLIGHT -->
+<div class="spotlight" id="spotlight">
+  <div class="spotlight-inner">
+    <div class="spotlight-visual">
+      <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=900&q=85" alt="Aranya Collection" loading="lazy">
+    </div>
+    <div class="spotlight-content">
+      <p class="spotlight-eye">Our Bestseller</p>
+      <h2 class="spotlight-title">The Aranya<br><em>Collection</em></h2>
+      <p class="spotlight-desc">Earthy warmth meets contemporary craft. Aranya draws from India's forest heritage — warm teakwood tones, natural linen, and handwoven textures that feel deeply rooted and effortlessly modern.</p>
+      <div class="spotlight-items">
+        <div class="spotlight-item"><span class="spotlight-item-name">Cloud Boucle Sectional</span><span class="spotlight-item-tag">Living Room</span></div>
+        <div class="spotlight-item"><span class="spotlight-item-name">Teak Slab Dining Table</span><span class="spotlight-item-tag">Dining</span></div>
+        <div class="spotlight-item"><span class="spotlight-item-name">Woven Cane King Bed</span><span class="spotlight-item-tag">Bedroom</span></div>
+        <div class="spotlight-item"><span class="spotlight-item-name">Mango Wood Sideboard</span><span class="spotlight-item-tag">Storage</span></div>
+        <div class="spotlight-item"><span class="spotlight-item-name">Handwoven Jute Rug 8×10</span><span class="spotlight-item-tag">Décor</span></div>
+      </div>
+      <a href="#contact" class="btn-accent">Shop This Collection</a>
+    </div>
+  </div>
+</div>
+
+<!-- FINDER -->
+<section class="finder-section" id="finder">
+  <div class="container">
+    <div class="finder-wrap">
+      <p class="section-eye">Package Finder</p>
+      <h2 class="section-title">Find your<br><em>perfect package</em></h2>
+      <div class="finder-steps-nav" id="finderNav"></div>
+      <div id="finderSteps"></div>
+      <div style="margin-top:20px" id="finderBtns">
+        <button class="btn-dark" id="finderNext">Next →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section id="benefits">
+  <div class="container">
+    <p class="section-eye">Why Magic Woods</p>
+    <h2 class="section-title">Everything done.<br><em>Nothing left to do.</em></h2>
+    <div class="benefits-grid">
+      <div class="benefit-card">
+        <div class="benefit-img">
+          <img src="https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=800&q=80" alt="Turnkey in one week" loading="lazy">
+        </div>
+        <p class="benefit-num">01</p>
+        <h3>Turnkey in one week</h3>
+        <p>Furniture, curtains, appliances, smart home, décor — all sourced, delivered, and installed by one team. No chasing contractors.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-img">
+          <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800&q=80" alt="Tailored to your taste" loading="lazy">
+        </div>
+        <p class="benefit-num">02</p>
+        <h3>Tailored to your taste</h3>
+        <p>Swap materials, change finishes, adjust colours — our packages are a strong starting point, not a rigid constraint.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-img">
+          <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&q=80" alt="Design already done" loading="lazy">
+        </div>
+        <p class="benefit-num">03</p>
+        <h3>Design already done</h3>
+        <p>Every item is curated to match popular Indian floor plans. No interior designer needed. Pick your world and move in.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPLETE HOME -->
+<section class="complete-section" id="complete">
+  <div class="complete-head container">
+    <p class="section-eye">Everything Included</p>
+    <h2 class="section-title">Complete your<br><em>home</em></h2>
+  </div>
+  <div class="complete-tabs" id="completeTabs"></div>
+  <div id="completePanels"></div>
+</section>
+
+<!-- GALLERY STRIP -->
+<div class="gallery-strip" id="galleryStrip"></div>
+
+<!-- SHOWROOM BANNER -->
+<div class="showroom-banner">
+  <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1600&q=80" alt="Magic Woods Showroom" loading="lazy">
+  <div class="showroom-overlay"></div>
+  <div class="showroom-content">
+    <p>Experience Centres</p>
+    <h2>Coming soon —<br><em>Showrooms across India</em></h2>
+  </div>
+</div>
+
+<!-- REVIEWS -->
+<section class="reviews-section" id="reviews">
+  <div class="container">
+    <div class="reviews-header">
+      <div>
+        <p class="section-eye">Customer Stories</p>
+        <h2 class="section-title">Over 5,000 happy<br><em>homes across India</em></h2>
+      </div>
+      <div class="reviews-score">
+        <div class="score-num">4.9</div>
+        <div>
+          <div class="score-stars">★★★★★</div>
+          <div class="score-count">384 verified reviews</div>
+        </div>
+      </div>
+    </div>
+    <div class="reviews-grid" id="reviewsGrid"></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="contact-inner">
+    <p class="section-eye">Get in Touch</p>
+    <h2 class="section-title">Tell us about<br><em>your home</em></h2>
+    <p>Share your apartment size and preferences. We come back with a curated package and fixed price within one business day.</p>
+    <div class="apt-opts" id="aptOpts">
+      <div class="apt-opt" onclick="selectApt(this)">1 BHK</div>
+      <div class="apt-opt" onclick="selectApt(this)">2 BHK</div>
+      <div class="apt-opt" onclick="selectApt(this)">3 BHK</div>
+      <div class="apt-opt" onclick="selectApt(this)">4 BHK</div>
+      <div class="apt-opt" onclick="selectApt(this)">Villa</div>
+      <div class="apt-opt" onclick="selectApt(this)">Penthouse</div>
+      <div class="apt-opt" onclick="selectApt(this)">Farmhouse</div>
+    </div>
+    <form class="contact-form" onsubmit="submitContact(event)">
+      <input type="text" placeholder="Your Name" required>
+      <input type="tel" placeholder="WhatsApp Number" required>
+      <input type="email" placeholder="Email Address">
+      <input type="text" placeholder="City — Mumbai, Delhi, Bangalore…">
+      <button type="submit" class="btn-accent" style="padding:15px;cursor:pointer;font-family:var(--sans);font-weight:600;font-size:.82rem;text-transform:uppercase;letter-spacing:.06em">Send My Requirements →</button>
+    </form>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <div class="container">
+    <p class="section-eye">Questions</p>
+    <h2 class="section-title">Things people<br><em>ask us</em></h2>
+    <div class="faq-grid" id="faqGrid"></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="nav-logo">Magic Woods</a>
+        <p>India's premium home furnishing service. Fully styled, delivered in 10 days. Serving 6 cities and growing.</p>
+        <div class="footer-social">
+          <a href="#">in</a><a href="#">ig</a><a href="#">fb</a><a href="#">yt</a><a href="#">pi</a>
+        </div>
+      </div>
+      <div>
+        <h5>Packages</h5>
+        <ul>
+          <li><a href="#">1 BHK</a></li><li><a href="#">2 BHK</a></li><li><a href="#">3 BHK</a></li>
+          <li><a href="#">4 BHK</a></li><li><a href="#">Villa</a></li><li><a href="#">Kids Room</a></li><li><a href="#">Home Office</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Support</h5>
+        <ul>
+          <li><a href="#">Shipping & Delivery</a></li><li><a href="#">Installation Guide</a></li>
+          <li><a href="#">Warranty & Returns</a></li><li><a href="#">Track Your Order</a></li><li><a href="#">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Contact</h5>
+        <ul>
+          <li><a href="#">📞 +91 98765 43210</a></li><li><a href="#">💬 WhatsApp Us</a></li>
+          <li><a href="#">✉️ hello@magicwoods.in</a></li>
+          <li><a href="#">📍 Mumbai · Delhi · Bangalore</a></li><li><a href="#">📍 Hyderabad · Pune · Chennai</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Magic Woods India Pvt. Ltd. · Privacy · Terms · GST: 27AAAAA0000A1Z5</span>
+      <div class="footer-pay">
+        <span class="pay-badge">UPI</span><span class="pay-badge">EMI</span>
+        <span class="pay-badge">Visa</span><span class="pay-badge">MC</span><span class="pay-badge">RazorPay</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<a class="wa-float" href="https://wa.me/919876543210" title="Chat on WhatsApp">💬</a>
+
+<script>
+// ── IMAGE MAP ──
+const IMG = {
+  forest:'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=500&q=80',
+  river:'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=500&q=80',
+  loft:'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=500&q=80',
+  blush:'https://images.unsplash.com/photo-1617103996702-96ff29b1c467?w=500&q=80',
+  teak:'https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=500&q=80',
+  regal:'https://images.unsplash.com/photo-1600210492493-0946911123ea?w=500&q=80',
+  zen:'https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=500&q=80',
+  amber:'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=500&q=80',
+};
+
+// ── TICKER ──
+const tickerMsgs = ['Free home visit across India','5000+ homes furnished','10-day delivery guarantee','0% EMI available on all packages','Design consultation included','Serving Mumbai · Delhi · Bangalore · Hyderabad · Pune · Chennai'];
+const tr = document.getElementById('ticker');
+const full = [...tickerMsgs,...tickerMsgs].map(m=>`<span>${m}</span><span class="ticker-sep">—</span>`).join('');
+tr.innerHTML = full+full;
+
+// ── PACKAGES DATA ──
+const packages = {
+  '1 BHK':[
+    {name:'Aranya 1BHK',price:'₹2,80,000',rating:'4.9 (42)',badge:'BESTSELLER',style:'forest'},
+    {name:'Meghna 1BHK',price:'₹1,85,000',rating:'4.8 (67)',badge:'BESTSELLER',style:'river'},
+    {name:'Urban Loft 1BHK',price:'₹3,15,000',rating:'4.9 (28)',style:'loft'},
+    {name:'Mogra 1BHK',price:'₹2,20,000',rating:'4.8 (51)',style:'blush'},
+  ],
+  '2 BHK':[
+    {name:'Aranya 2BHK',price:'₹4,50,000',rating:'4.9 (38)',badge:'BESTSELLER',style:'forest'},
+    {name:'Teak & Stone 2BHK',price:'₹5,80,000',rating:'4.9 (22)',style:'teak'},
+    {name:'Urban Loft 2BHK',price:'₹4,20,000',rating:'4.8 (44)',style:'loft'},
+    {name:'Rajwada 2BHK',price:'₹6,50,000',rating:'4.9 (17)',style:'regal'},
+  ],
+  '3 BHK':[
+    {name:'Aranya 3BHK',price:'₹7,20,000',rating:'4.9 (29)',badge:'BESTSELLER',style:'forest'},
+    {name:'Copper Horizon 3BHK',price:'₹9,50,000',rating:'5.0 (11)',style:'amber'},
+    {name:'Rajwada 3BHK',price:'₹11,00,000',rating:'4.9 (14)',style:'regal'},
+    {name:'Bamboo Zen 3BHK',price:'₹6,80,000',rating:'4.8 (32)',style:'zen'},
+  ],
+  '4 BHK':[
+    {name:'Copper Horizon 4BHK',price:'₹14,00,000',rating:'5.0 (8)',badge:'BESTSELLER',style:'amber'},
+    {name:'Rajwada 4BHK',price:'₹16,50,000',rating:'4.9 (9)',style:'regal'},
+    {name:'Aranya 4BHK',price:'₹12,50,000',rating:'4.9 (12)',style:'forest'},
+    {name:'Teak & Stone 4BHK',price:'₹13,80,000',rating:'4.8 (7)',style:'teak'},
+  ],
+  'Villa':[
+    {name:'Rajwada Villa',price:'₹28,00,000',rating:'5.0 (6)',badge:'BESTSELLER',style:'regal'},
+    {name:'Copper Horizon Villa',price:'₹22,00,000',rating:'4.9 (9)',style:'amber'},
+    {name:'Aranya Villa',price:'₹18,50,000',rating:'4.9 (11)',style:'forest'},
+    {name:'Teak & Stone Villa',price:'₹24,00,000',rating:'4.8 (5)',style:'teak'},
+  ],
+  'Penthouse':[
+    {name:'Riviera Penthouse',price:'₹38,00,000',rating:'5.0 (4)',badge:'BESTSELLER',style:'regal'},
+    {name:'Gold Reserve Pent.',price:'₹45,00,000',rating:'4.9 (3)',style:'amber'},
+    {name:'Marble & Teak Pent.',price:'₹52,00,000',rating:'5.0 (2)',style:'teak'},
+    {name:'Forest Lux Penthouse',price:'₹34,00,000',rating:'4.9 (5)',style:'forest'},
+  ],
+  'Kids Room':[
+    {name:'Sunshine Kids',price:'₹1,80,000',rating:'4.9 (31)',badge:'BESTSELLER',style:'blush'},
+    {name:'Explorer Kids',price:'₹2,20,000',rating:'4.8 (19)',style:'river'},
+    {name:'Forest Fairy',price:'₹1,95,000',rating:'5.0 (8)',style:'zen'},
+    {name:'Cosmic Kids',price:'₹2,50,000',rating:'4.7 (14)',style:'regal'},
+  ],
+  'Home Office':[
+    {name:'Minimal Office',price:'₹1,20,000',rating:'4.8 (23)',badge:'BESTSELLER',style:'loft'},
+    {name:'Executive Oak',price:'₹2,80,000',rating:'4.9 (12)',style:'teak'},
+    {name:'Creative Studio',price:'₹1,60,000',rating:'4.8 (18)',style:'forest'},
+    {name:'Library Nook',price:'₹1,90,000',rating:'4.9 (9)',style:'amber'},
+  ],
+};
+
+function renderPkgs(tab){
+  const data = packages[tab]||[];
+  document.getElementById('pkgGrid').innerHTML = data.map(p=>`
+    <div class="pkg-card" onclick="addToCart('${p.name}')">
+      <div class="pkg-img">
+        <img src="${IMG[p.style]}" alt="${p.name}" loading="lazy">
+        ${p.badge?`<div class="pkg-badge">${p.badge}</div>`:''}
+      </div>
+      <div class="pkg-name">${p.name}</div>
+      <div class="pkg-rating">⭐ ${p.rating}</div>
+      <div class="pkg-price"><span>from </span>${p.price}</div>
+    </div>`).join('');
+}
+function renderPkgTabs(){
+  const tabs = Object.keys(packages);
+  document.getElementById('pkgTabs').innerHTML = tabs.map((t,i)=>`<div class="pkg-tab${i===0?' active':''}" onclick="switchPkg('${t}',this)">${t}</div>`).join('');
+  renderPkgs(tabs[0]);
+}
+function switchPkg(tab,el){
+  document.querySelectorAll('.pkg-tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  renderPkgs(tab);
+}
+renderPkgTabs();
+
+// ── COMPLETE HOME ──
+const completeItems = [
+  {tab:'Curtains',img:'https://images.unsplash.com/photo-1533090161767-e6ffed986c88?w=900&q=80',title:'Curated Curtain Sets',desc:'Ready-made curtain sets selected to perfectly complement each package style — sheer, blackout, or layered, all pre-measured and hemmed to your window.'},
+  {tab:'Kitchen Appliances',img:'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=900&q=80',title:'Kitchen Appliances',desc:'Refrigerator, microwave, chimney, dishwasher, and washing machine — every major appliance from trusted brands, sourced and installed in one visit.'},
+  {tab:'Smart Home',img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80',title:'Smart Home Automation',desc:'Smart lighting, motorised curtains, video doorbell, and whole-home WiFi mesh — designed for Indian power grids with zero-hassle setup.'},
+  {tab:'Décor Sets',img:'https://images.unsplash.com/photo-1484101403633-562f891dc89a?w=900&q=80',title:'Curated Décor Sets',desc:'Cushions, throws, trays, vases, artwork — the small details that transform a furnished flat into a home that feels genuinely lived in.'},
+  {tab:'Bedding',img:'https://images.unsplash.com/photo-1540518614846-7eded433c457?w=900&q=80',title:'Bedroom Essentials',desc:'Premium mattresses, pillows, duvets, and quality bedding sets so your first night in your new home feels like a five-star experience.'},
+  {tab:'Modular Kitchen',img:'https://images.unsplash.com/photo-1556909172-54557c7e4fb7?w=900&q=80',title:'Modular Kitchens',desc:'Custom modular kitchens with soft-close shutters, granite countertops, and stainless sinks — sized to slot seamlessly into any Indian apartment layout.'},
+];
+function renderComplete(){
+  document.getElementById('completeTabs').innerHTML = completeItems.map((c,i)=>`<div class="complete-tab${i===0?' active':''}" onclick="switchComplete(${i},this)">${c.tab}</div>`).join('');
+  document.getElementById('completePanels').innerHTML = completeItems.map((c,i)=>`
+    <div class="complete-panel${i===0?' active':''}" id="cp${i}">
+      <div class="complete-visual"><img src="${c.img}" alt="${c.title}" loading="lazy"></div>
+      <div class="complete-text">
+        <h3>${c.title}</h3><p>${c.desc}</p>
+        <a href="#contact" class="btn-dark">Enquire About This</a>
+      </div>
+    </div>`).join('');
+}
+function switchComplete(i,el){
+  document.querySelectorAll('.complete-tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('.complete-panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('cp'+i).classList.add('active');
+}
+renderComplete();
+
+// ── GALLERY STRIP ──
+const galleryImgs = [
+  'https://images.unsplash.com/photo-1617103996702-96ff29b1c467?w=600&q=80',
+  'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&q=80',
+  'https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=600&q=80',
+  'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=600&q=80',
+  'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=600&q=80',
+];
+document.getElementById('galleryStrip').innerHTML = galleryImgs.map(u=>`<div class="gallery-cell"><img src="${u}" alt="Interior" loading="lazy"></div>`).join('');
+
+// ── REVIEWS ──
+const reviewImgs = [
+  ['https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=120&q=70','https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=120&q=70','https://images.unsplash.com/photo-1617103996702-96ff29b1c467?w=120&q=70'],
+  ['https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=120&q=70','https://images.unsplash.com/photo-1600210492493-0946911123ea?w=120&q=70','https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=120&q=70'],
+  ['https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=120&q=70','https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=120&q=70','https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=120&q=70'],
+  ['https://images.unsplash.com/photo-1617103996702-96ff29b1c467?w=120&q=70','https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=120&q=70','https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=120&q=70'],
+  ['https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=120&q=70','https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=120&q=70','https://images.unsplash.com/photo-1600210492493-0946911123ea?w=120&q=70'],
+  ['https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=120&q=70','https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=120&q=70','https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=120&q=70'],
+];
+const reviews = [
+  {author:'Priya M.',city:'Mumbai',pkg:'Aranya 2BHK',text:'Absolutely transformed our flat. The whole team was professional and completed everything in one day. The teak furniture is stunning quality.',stars:5,date:'2026-04-12',idx:0},
+  {author:'Rahul & Ananya K.',city:'Bangalore',pkg:'Meghna 3BHK',text:'We were skeptical about furnishing online but Magic Woods made it seamless. Our home looks like it came out of a magazine.',stars:5,date:'2026-03-28',idx:1},
+  {author:'Sanjay T.',city:'Delhi NCR',pkg:'Urban Loft 1BHK',text:'Perfect for my bachelor pad. Minimal, clean, exactly what I wanted. Even the curtains and décor were included — nothing left to do.',stars:5,date:'2026-05-01',idx:2},
+  {author:'Neha & Vikram S.',city:'Hyderabad',pkg:'Rajwada 3BHK',text:'The Rajwada collection is regal and warm. Our guests always ask who did the interiors. Worth every rupee.',stars:5,date:'2026-02-18',idx:3},
+  {author:'Aditya R.',city:'Pune',pkg:'Copper Horizon 4BHK',text:'Fast, professional, exceptional quality. The 0% EMI option made it very easy. Highly recommend to anyone moving into a new home.',stars:5,date:'2026-01-30',idx:4},
+  {author:'Kavya & Ishaan P.',city:'Chennai',pkg:'Bamboo Zen 2BHK',text:'Love the Zen vibe — very calming and natural. Magic Woods team was responsive throughout. Great value for the quality delivered.',stars:5,date:'2026-04-22',idx:5},
+];
+document.getElementById('reviewsGrid').innerHTML = reviews.map(r=>`
+  <div class="review-card">
+    <div class="review-photos">
+      ${reviewImgs[r.idx].map(u=>`<img class="review-photo" src="${u}" alt="Review photo" loading="lazy">`).join('')}
+    </div>
+    <div class="review-author">${r.author}</div>
+    <div class="review-pkg">${r.pkg} · ${r.city}</div>
+    <div class="review-stars">${'★'.repeat(r.stars)}</div>
+    <div class="review-text">${r.text}</div>
+    <div class="review-date">${r.date}</div>
+  </div>`).join('');
+
+// ── FINDER ──
+const finderData = [
+  {step:'STEP 1 OF 4',q:'What is the size of your home?',opts:['1 BHK','2 BHK','3 BHK','4 BHK','Villa','Farmhouse']},
+  {step:'STEP 2 OF 4',q:'What is your furnishing budget?',opts:['Under ₹2 Lakh','₹2L – ₹5L','₹5L – ₹10L','₹10L – ₹20L','₹20L+']},
+  {step:'STEP 3 OF 4',q:'What is the home for?',opts:['Own use','Long-term rental','Holiday / Airbnb','Investment flat']},
+  {step:'STEP 4 OF 4',q:'Leave your details for a curated offer',form:true},
+];
+let finderStep=0;const finderAnswers={};
+function renderFinder(){
+  document.getElementById('finderNav').innerHTML = finderData.map((d,i)=>`<div class="finder-step-btn${i===finderStep?' active':''}">${d.step}</div>`).join('');
+  document.getElementById('finderSteps').innerHTML = finderData.map((d,i)=>{
+    if(d.form) return `<div class="finder-q${i===finderStep?' active':''}" id="fq${i}">
+      <h3>${d.q}</h3>
+      <div class="finder-form">
+        <input type="text" placeholder="Your Name" id="fName">
+        <input type="tel" placeholder="WhatsApp Number" id="fPhone">
+        <input type="email" placeholder="Email (optional)" id="fEmail">
+        <small>Our advisor will reach out within 30 minutes during business hours.</small>
+      </div></div>`;
+    return `<div class="finder-q${i===finderStep?' active':''}" id="fq${i}">
+      <h3>${d.q}</h3>
+      <div class="finder-opts">${d.opts.map(o=>`<div class="finder-opt${finderAnswers[i]===o?' selected':''}" onclick="selFinder(this,${i},'${o}')">${o}</div>`).join('')}</div>
+    </div>`;
+  }).join('');
+  document.getElementById('finderNext').textContent = finderStep===finderData.length-1?'Get My Package →':'Next →';
+}
+function selFinder(el,s,v){
+  el.closest('.finder-opts').querySelectorAll('.finder-opt').forEach(e=>e.classList.remove('selected'));
+  el.classList.add('selected');finderAnswers[s]=v;
+}
+document.getElementById('finderNext').addEventListener('click',()=>{
+  if(finderStep<finderData.length-1){finderStep++;renderFinder();}
+  else{alert('Thank you! Our advisor will send you a curated package shortly.');finderStep=0;renderFinder();}
+});
+renderFinder();
+
+// ── FAQ ──
+const faqs = [
+  {q:'Do you operate in my city?',a:'We serve Mumbai, Delhi NCR, Bangalore, Hyderabad, Pune, and Chennai. Book a free home visit and our advisor comes to you.'},
+  {q:'Can I customise my package?',a:'Yes. Swap materials, change finishes, add or remove items — our packages are starting points, not rigid constraints. Most changes are confirmed before delivery.'},
+  {q:'How long does delivery take?',a:'Average from order confirmation to move-in ready is 10 days. Rush delivery is available in most cities — ask when booking.'},
+  {q:'What if something arrives damaged?',a:'All items carry a minimum 1-year Magic Woods warranty. Report damage within 48 hours and we replace or repair at no cost.'},
+  {q:'Do you offer EMI?',a:'Yes. 0% EMI for 6 and 12 months via HDFC, ICICI, Axis, and SBI credit cards. No-cost EMI also available via Bajaj Finserv.'},
+  {q:'Is assembly and installation included?',a:'Completely. Assembly, arrangement, packaging removal, and a final walk-through are all included — no hidden charges.'},
+  {q:'Where are your products made?',a:'We partner with premium workshops across Rajasthan, Gujarat, and Tamil Nadu, with select imported pieces from Italy, Vietnam, and Scandinavia.'},
+  {q:'Do you furnish rental and holiday homes?',a:'Yes — dedicated short-term rental collection built for high guest turnover, available in budget, mid, and premium tiers.'},
+];
+document.getElementById('faqGrid').innerHTML = faqs.map(f=>`
+  <div class="faq-item" onclick="this.classList.toggle('open')">
+    <div class="faq-q">${f.q}<i class="faq-icon">+</i></div>
+    <div class="faq-a">${f.a}</div>
+  </div>`).join('');
+
+// ── CONTACT & CART ──
+function selectApt(el){document.querySelectorAll('.apt-opt').forEach(e=>e.classList.remove('selected'));el.classList.add('selected');}
+function submitContact(e){e.preventDefault();alert('Thank you! Our advisor will contact you within 30 minutes via WhatsApp.');}
+let cartCount=0;
+function addToCart(n){cartCount++;document.getElementById('cartBadge').textContent=cartCount;}
+</script>
+</body>
+</html>
