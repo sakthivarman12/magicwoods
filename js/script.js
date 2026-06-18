@@ -141,6 +141,44 @@ function switchPkg(tab, el) {
 
 renderPkgTabs();
 
+// LAYOUT SLIDESHOW (hover-activated, character stagger + clip-path reveal)
+const layoutSlides = ['Studio', '1 BHK', '2 BHK', '3 BHK', 'Villa'].map(tab => {
+  const best = packages[tab].find(p => p.badge) || packages[tab][0];
+  return { tab, img: IMG[best.style] };
+});
+
+function renderLayoutSlideshow() {
+  const textCol = document.getElementById('layoutTextCol');
+  const imageWrap = document.getElementById('layoutImageWrap');
+  if (!textCol || !imageWrap) return;
+
+  textCol.innerHTML = layoutSlides.map((slide, i) => {
+    const chars = slide.tab.split('').map(ch => {
+      const safe = ch === ' ' ? '&nbsp;' : ch;
+      return `<span class="layout-char"><span class="layout-char-base">${safe}</span><span class="layout-char-top">${safe}</span></span>`;
+    }).join('');
+    return `<span class="layout-text-item${i === 0 ? ' active' : ''}" data-index="${i}">${chars}</span>`;
+  }).join('');
+
+  imageWrap.innerHTML = layoutSlides.map((slide, i) =>
+    `<img src="${slide.img}" alt="${slide.tab}" loading="${i === 0 ? 'eager' : 'lazy'}" class="${i === 0 ? 'active' : ''}">`
+  ).join('');
+
+  const items = textCol.querySelectorAll('.layout-text-item');
+  const images = imageWrap.querySelectorAll('img');
+  items.forEach(item => {
+    item.addEventListener('mouseenter', () => {
+      const index = item.dataset.index;
+      items.forEach(t => t.classList.remove('active'));
+      images.forEach(im => im.classList.remove('active'));
+      item.classList.add('active');
+      images[index].classList.add('active');
+    });
+  });
+}
+
+renderLayoutSlideshow();
+
 // COMPLETE HOME
 const completeItems = [
   { tab: 'Curtains',              img: 'img/complete-curtains.jpg',          title: 'Curated Curtain Sets',   desc: 'Ready-made curtain sets selected to match the style of each package — all pre-measured and co-ordinated to complement your furniture.' },

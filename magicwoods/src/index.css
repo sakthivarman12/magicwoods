@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --primary:       #1a3a2e;
+    --primary-light: #2d5a4a;
+    --accent:        #c9a961;
+    --bg-light:      #f8f6f1;
+    --bg-white:      #ffffff;
+    --text-dark:     #1a1a1a;
+    --text-light:    #666666;
+    --border:        #e0dcd3;
+  }
+
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html, body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--bg-white);
+    color: var(--text-dark);
+    scroll-behavior: smooth;
+  }
+}
